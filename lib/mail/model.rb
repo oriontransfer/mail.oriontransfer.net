@@ -59,10 +59,10 @@ class Account < ActiveRecord::Base
 	def self.for_email_address(email_address)
 		local_part, domain_name = email_address.split("@")
 		
-		domain = Domain.first(name: domain_name)
+		domain = Domain.where(name: domain_name).first
 		
 		if domain
-			return domain.accounts.first(local_part: local_part)
+			return domain.accounts.where(local_part: local_part).first
 		else
 			return nil
 		end
@@ -73,7 +73,7 @@ class Domain < ActiveRecord::Base
 	has_many :accounts
 	
 	def create_postmaster_account(password = nil)
-		postmaster = accounts.first(local_part: "postmaster")
+		postmaster = accounts.where(local_part: "postmaster").first
 	
 		if postmaster == nil
 			postmaster = self.class.setup_mail_account("Postmaster", "postmaster", name, password)
