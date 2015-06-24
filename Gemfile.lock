@@ -1,0 +1,25 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    mail (2.6.3)
+      mime-types (>= 1.16, < 3)
+    mime-types (2.6.1)
+    puma (2.11.3)
+      rack (>= 1.1, < 2.0)
+    rack (1.6.4)
+    rack-cache (1.2)
+      rack (>= 0.4)
+    trenni (1.4.1)
+    utopia (1.0.10)
+      mail (~> 2.6.1)
+      mime-types (~> 2.0)
+      rack (~> 1.5)
+      rack-cache (~> 1.2.0)
+      trenni (~> 1.4.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  puma
+  utopia (~> 1.0.10)
