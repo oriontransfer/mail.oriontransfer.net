@@ -9,7 +9,7 @@ require 'active_record'
 require 'mysql2'
 
 ActiveRecord::Base.configurations = {
-	production: {
+	'production' => {
 		adapter: "mysql2",
 		database: "vmail",
 		username: "vmail",
