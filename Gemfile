@@ -2,6 +2,10 @@
 source "https://rubygems.org"
 
 gem "utopia", "~> 1.0.10"
+
+gem "pry"
+gem "activerecord", "~> 4.0"
+
 # gem "utopia-tags-gallery"
 # gem "utopia-tags-google-analytics"
 
