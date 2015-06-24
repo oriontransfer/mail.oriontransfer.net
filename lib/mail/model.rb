@@ -94,7 +94,7 @@ class Domain < ActiveRecord::Base
 	
 	def self.setup_mail_account(full_name, local_part, domain_name, password)
 		domain = Domain.find_or_create_by(name: domain_name)
-		account = domain.accounts.first(local_part: local_part)
+		account = domain.accounts.where(local_part: local_part).first
 
 		if account == nil
 			account = domain.accounts.build(local_part: local_part)
