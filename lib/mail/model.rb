@@ -5,7 +5,8 @@ def generate_password
 	(0..8).map {PASSWORD_CHARACTERS.sample}.join
 end
 
-require 'activerecord'
+require 'active_record'
+require 'mysql2'
 
 ActiveRecord::Base.configurations = {
 	production: {
