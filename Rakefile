@@ -18,7 +18,7 @@ task :summary => :environment do
 	Domain.find_each do |domain|
 		domain_color = domain.is_enabled ? :green : :red
 		
-		puts "[#{domain.id}] #{Rainbow(domain.name).foreground(domain_color)} (#{domain.accounts.count} accounts)"
+		puts "[#{domain.id}] #{Rainbow(domain.name).foreground(domain_color)} (#{domain.accounts.count} accounts): #{domain.disk_usage}"
 		
 		domain.accounts.each do |account|
 			account_color = account.is_enabled ? :green : :red
