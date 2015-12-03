@@ -13,6 +13,8 @@ task :environment do
 end
 
 task :summary => :environment do
+	require 'rainbow'
+	
 	Domain.find_each do |domain|
 		domain_color = domain.is_enabled ? :green : :red
 		
