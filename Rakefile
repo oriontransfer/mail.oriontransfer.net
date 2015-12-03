@@ -8,7 +8,11 @@ task :deploy do
 	puts "Preparing to deploy site in #{Dir.pwd.inspect}..."
 end
 
-task :summary do
+task :environment do
+	require_relative 'lib/mail/model'
+end
+
+task :summary => :environment do
 	Domain.each do |domain|
 		domain_color = domain.is_active ? :green : :red
 		
@@ -23,9 +27,8 @@ task :summary do
 	end
 end
 
-task :console do
+task :console => :environment  do
 	require 'pry'
-	require_relative 'lib/mail/model'
 	
 	binding.pry
 end
