@@ -56,6 +56,14 @@ class Account < ActiveRecord::Base
 		return "#{local_part}@#{domain.name}"
 	end
 	
+	def description
+		if self.forward
+			"#{self.email_address} -> #{self.forward}"
+		else
+			self.email_address
+		end
+	end
+	
 	def self.for_email_address(email_address)
 		local_part, domain_name = email_address.split("@")
 		

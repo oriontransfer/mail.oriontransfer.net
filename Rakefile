@@ -24,7 +24,7 @@ task :summary => :environment do
 			account_color = account.is_enabled ? :green : :red
 			account_color = :blue if account.forward
 			
-			puts "\t#{Rainbow(account.email_address).foreground(account_color)}: #{account.disk_usage}"
+			puts "\t#{Rainbow(account.description).foreground(account_color)}: #{account.disk_usage}"
 		end
 	end
 end
