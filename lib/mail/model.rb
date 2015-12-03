@@ -29,6 +29,8 @@ require 'digest/sha1'
 require 'base64'
 
 def encode_password(plaintext)
+	return nil unless plaintext and !plaintext.empty?
+	
 	salt = (0...12).collect{(rand*255).to_i.chr}.join
 	ssha = Digest::SHA1.digest(plaintext+salt) + salt
 
