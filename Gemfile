@@ -1,7 +1,7 @@
 
 source "https://rubygems.org"
 
-gem "utopia", "~> 1.0.10"
+gem "utopia", "~> 1.1.4"
 
 gem "pry"
 gem "activerecord", "~> 4.0"
