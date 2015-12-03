@@ -78,7 +78,7 @@ class Account < ActiveRecord::Base
 end
 
 class Domain < ActiveRecord::Base
-	has_many :accounts
+	has_many :accounts, :dependent => :destroy
 	
 	def create_postmaster_account(password = nil)
 		postmaster = accounts.where(local_part: "postmaster").first
