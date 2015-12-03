@@ -13,7 +13,7 @@ task :environment do
 end
 
 task :summary => :environment do
-	Domain.each do |domain|
+	Domain.find_each do |domain|
 		domain_color = domain.is_active ? :green : :red
 		
 		puts "#{Rainbow(domain.name).foreground(domain_color)} (#{domain.accounts.count} accounts)"
