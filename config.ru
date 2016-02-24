@@ -14,8 +14,8 @@ require 'utopia'
 require 'rack/cache'
 
 if RACK_ENV == :production
-	use Utopia::ExceptionHandler, "/errors/exception"
-	use Utopia::MailExceptions
+	use Utopia::Exceptions::Handler
+	use Utopia::Exceptions::Mailer
 elsif RACK_ENV == :development
 	use Rack::ShowExceptions
 end
@@ -31,16 +31,13 @@ end
 
 use Rack::ContentLength
 
-use Utopia::Redirector,
-	patterns: [
-		Utopia::Redirector::DIRECTORY_INDEX
-	],
-	strings: {
-		'/' => '/welcome/index',
-	},
-	errors: {
-		404 => "/errors/file-not-found"
-	}
+use Utopia::Redirection::Rewrite,
+	'/' => '/welcome/index'
+
+use Utopia::Redirection::DirectoryIndex
+
+use Utopia::Redirection::Errors,
+	404 => '/errors/file-not-found'
 
 use Utopia::Localization,
 	:default_locale => 'en',

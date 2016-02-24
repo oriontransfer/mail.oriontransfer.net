@@ -1,14 +1,14 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activemodel (4.2.5)
-      activesupport (= 4.2.5)
+    activemodel (4.2.5.1)
+      activesupport (= 4.2.5.1)
       builder (~> 3.1)
-    activerecord (4.2.5)
-      activemodel (= 4.2.5)
-      activesupport (= 4.2.5)
+    activerecord (4.2.5.1)
+      activemodel (= 4.2.5.1)
+      activesupport (= 4.2.5.1)
       arel (~> 6.0)
-    activesupport (4.2.5)
+    activesupport (4.2.5.1)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
@@ -16,37 +16,40 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.3)
     builder (3.2.2)
-    coderay (1.1.0)
+    coderay (1.1.1)
     concurrent-ruby (1.0.0)
+    http-accept (1.4.0)
     i18n (0.7.0)
     json (1.8.3)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
-    mime-types (2.99)
-    minitest (5.8.3)
-    mysql2 (0.4.2)
+    mime-types (2.99.1)
+    minitest (5.8.4)
+    mysql2 (0.4.3)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    puma (2.15.3)
+    puma (2.16.0)
     rack (1.6.4)
     rack-cache (1.2)
       rack (>= 0.4)
     rainbow (2.0.0)
+    rake (10.5.0)
     slop (3.6.0)
     thread_safe (0.3.5)
-    trenni (1.4.3)
+    trenni (1.4.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    utopia (1.1.4)
+    utopia (1.4.0)
       concurrent-ruby (~> 1.0.0)
-      mail (~> 2.6.1)
+      http-accept (~> 1.4.0)
+      mail (~> 2.6.3)
       mime-types (~> 2.0)
       rack (~> 1.6)
       rack-cache (~> 1.2.0)
-      trenni (~> 1.4.1)
+      trenni (~> 1.4.5)
 
 PLATFORMS
   ruby
@@ -57,7 +60,8 @@ DEPENDENCIES
   pry
   puma
   rainbow (~> 2.0.0)
-  utopia (~> 1.1.4)
+  rake
+  utopia (~> 1.4.0)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
