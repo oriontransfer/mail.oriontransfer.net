@@ -2,7 +2,7 @@
 PASSWORD_CHARACTERS = [*('a'..'z'), *('A'..'Z'),*('2'..'9'),'@', '$', '%', '&', '*', ':'].flatten - ['i', 'l', 'I', 'L', 'j', 'J']
 
 def generate_password
-	(0..8).map {PASSWORD_CHARACTERS.sample}.join
+	(0..12).map {PASSWORD_CHARACTERS.sample}.join
 end
 
 require 'active_record'
