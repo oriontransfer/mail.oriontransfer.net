@@ -17,8 +17,6 @@ ActiveRecord::Base.configurations = {
 		username: "vmail",
 		password: "JALRtzMvm9b6DKwz",
 		strict: true,
-		host: '127.0.0.1',
-		port: 60526
 	}
 }
 
