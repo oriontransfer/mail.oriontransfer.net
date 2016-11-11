@@ -130,7 +130,6 @@ table.listing thead {
 }
 
 table.listing .date, table.listing .number {
-	width: 80px;
 	text-align: center;
 }
 
