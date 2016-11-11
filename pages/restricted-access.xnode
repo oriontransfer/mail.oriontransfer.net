@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<?r response.content_type! "text/html; charset=utf-8" ?>
+		<?r response.cache! ?>
+		
+		<title>Restricted Access</title>
+		
+		<link rel="icon" type="image/png" href="/_static/icon.png" />
+		<link rel="stylesheet" href="/_static/site.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/_static/warning.css" type="text/css" media="screen" />
+	</head>
+
+	<body>
+		<div class="warning">
+			<h1>Restricted Access</h1>
+			<p>No Unauthorised Entry</p>
+			<p>All activity is logged.</p>
+		</div>
+	</body>
+</html>

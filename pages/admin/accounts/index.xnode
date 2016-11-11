@@ -1,0 +1,31 @@
+<page>
+	<heading>Accounts</heading>
+	
+	<table class="listing">
+		<thead>
+			<tr>
+				<th><a class="button new" href="new"><i class="fa fa-plus-circle"></i></a></th>
+				<th>Usage</th>
+				<th>Address</th>
+				<th><a class="button delete" href="#"><i class="fa fa-minus-circle"></i></a></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?r Domain.all.each do |domain| ?>
+			<tr>
+				<th>#{domain.disk_usage}</th>
+				<th colspan="2">#{domain.name}</th>
+				<th></th>
+			</tr>
+				<?r domain.accounts.each do |account| ?>
+				<tr data-id="#{account.id}">
+					<th class="actions"><a class="button edit" href="edit?id=#{account.id}"><i class="fa fa-edit"></i></a></th>
+					<td>#{account.disk_usage || ""}</td>
+					<td>#{account.description}</td>
+					<th class="actions"><input type="checkbox" class="selected" /></th>
+				</tr>
+				<?r end ?>
+			<?r end ?>
+		</tbody>
+	</table>
+</page>

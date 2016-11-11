@@ -8,6 +8,10 @@ gem "utopia", "~> 1.8.3"
 gem "rake"
 gem "bundler"
 
+gem "trenni-formatters", "~> 1.2"
+gem "latinum", "~> 1.0"
+gem "mapping", "~> 1.0"
+
 group :development do
 	# For `rake server`:
 	gem "puma"

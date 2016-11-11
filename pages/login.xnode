@@ -1,0 +1,15 @@
+<page>
+	<heading>Login</heading>
+	
+	<form class="basic" method="post" action="#">
+		<fieldset>
+			<dl>
+				<dt><label for="email">Email:</label></dt>
+				<dd><input type="text" name="email" /></dd>
+				<dt><label for="password">Password:</label></dt>
+				<dd><input type="password" name="password" /></dd>
+				<dd class="footer"><input type="submit" name="Login" /></dd>
+			</dl>
+		</fieldset>
+	</form>
+</page>

@@ -1,8 +1,9 @@
 
 body {
-	font-family: Verdana, Helvetica, Arial;
-	background-color: #ccc;
 	padding: 50px;
+	
+	font-family: "PT Sans", Verdana, Helvetica, Arial, sans-serif;
+	color: #111;
 }
 
 p {
@@ -14,10 +15,10 @@ p strong {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	color: #eee;
+	font-weight: normal;
+	color: #444;
 	margin-top: 2em;
 	margin-bottom: 1em;
-	text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.7);
 }
 
 img {
@@ -67,4 +68,187 @@ body.front h1 {
 	0 20px 20px rgba(0,0,0,.15);
 	
 	text-align: center;
+}
+
+/* Tables */
+
+table.listing, table.summary {
+	border-collapse: collapse;
+	width: 100%;
+	
+	font-size: 11pt;
+	
+	border: 1px solid #aaa;
+	background-color: white;
+}
+
+table.summary {
+	border: 1px solid #f5dd53;
+	background-color: #fff3a1;
+	
+	margin: 2em 0;
+	
+	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+table.listing thead th {
+	border-bottom: 1px solid #aaa;
+}
+
+table.listing td, table.summary td {
+	padding: 5pt;
+}
+
+table.listing th, table.summary th {
+	padding: 5pt;
+	font-weight: normal;
+}
+
+table.listing .actions {
+	width: 22pt;
+}
+
+table.listing tbody th {
+	background-color: rgba(10, 100, 200, 0.04);
+}
+
+table.listing tbody td.actions {
+	text-align: center;
+}
+
+table.listing tbody .description {
+	background-color: white;
+}
+
+table.listing tbody .description {
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+table.listing thead {
+	background: fixed url(/_static/table_background.png);
+}
+
+table.listing .date, table.listing .number {
+	width: 80px;
+	text-align: center;
+}
+
+table.listing .for {
+	text-align: center;
+}
+
+table.listing .total, table.listing .subtotal, table.listing .price, table.listing .quantity, table.listing .tax_rate, table.listing .credit, table.listing .debit {
+	text-align: right;
+	width: 12%;
+	border-left: 1px dashed #ccc;
+}
+
+table.listing tfoot {
+	border-top: 1px solid #ccc;
+	background-color: rgba(0, 80, 200, 0.08);
+}
+
+table.listing tfoot td {
+	text-align: right;
+}
+
+table.listing tbody tr:hover {
+	background-color: rgba(0, 80, 200, 0.08);
+}
+
+/* Listing Buttons */
+
+a.button i.fa-minus-circle { color: #900; }
+a.button:hover i.fa-minus-circle { color: #f00; }
+a.button i.fa-plus-circle { color: #090; }
+a.button:hover i.fa-plus-circle { color: #0d0; }
+a.button i.fa-edit { color: #009; }
+a.button:hover i.fa-edit { color: #00f; }
+
+a.button.featured i.fa-star { color: gold; }
+
+form fieldset {
+	border: 0;
+}
+
+form fieldset textarea {
+	box-sizing: border-box;
+	
+	width: 100%;
+	height: 10rem;
+}
+
+form fieldset.footer {
+	text-align: right;
+}
+
+/* Forms v2.1 */
+
+form.basic {
+	margin: auto;
+	width: 75%;
+	background-color: inherit;
+	box-shadow: 0 0 3rem rgba(0, 0, 0, 0.3);
+	padding: 1rem;
+	border-radius: 1rem;
+}
+
+form.basic fieldset {
+	margin: auto;
+	border: none;
+	padding: 10px;
+}
+
+form.basic dl {
+	padding: 0px;
+	margin: 0px;
+}
+
+form.basic dt {
+	margin: 0px;
+	padding: 0px;
+	
+	clear: both;
+	font-size: 12pt;
+	display: block;
+	float: left;
+	text-align: right;
+	width: 26%;
+	padding-right: 10px;
+}
+
+form.basic dd {
+	margin: 0px 0px 20px 30%;
+	padding: 0px;
+	font-size: 12pt;
+}
+
+form.basic dd input, form.basic dd textarea {
+	margin: 0px;
+}
+
+form.basic dd div {
+	left: 0px; right: 0px;
+	border: 1px solid orange;
+}
+
+form.basic dd input[type="text"],
+form.basic dd input[type="password"] {
+	width: 60%;
+}
+
+form.basic dd textarea {
+	width: 90%;
+	height: 200px;
+}
+
+form.basic dd.footer {
+	text-align: right;
+	padding: 0px 10px 0px 0px;
+}
+
+form.basic dd label.error {
+	display: block;
+	color: red;
 }

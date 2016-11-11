@@ -1,0 +1,34 @@
+<?r
+	f = FormFormatter.new(object: attributes[:account])
+	
+?><form class="basic editor" method="post" action="#">
+	<fieldset><legend>Domain</legend>
+		<dl>
+		<?r f.select :field => :domain_id do |select| ?>
+			<?r Domain.find_each do |domain| ?>
+				#{select.item :title => domain.name, :value => domain.id}
+			<?r end ?>
+		<?r end ?>
+		</dl>
+	</fieldset>
+	
+	<fieldset><legend>Account Details</legend>
+		<dl>
+			#{f.input :field => :name}
+			
+			#{f.input :field => :local_part}
+			#{f.input :field => :forward}
+			
+			#{f.input :field => :password_plaintext, :title => 'Password', :minlength => 8}
+			
+			#{f.input :field => :mail_location}
+			
+			#{f.checkbox :field => :is_enabled}
+			#{f.checkbox :field => :is_admin}
+		</dl>
+	</fieldset>
+	
+	<fieldset class="footer">
+		#{f.submit}
+	</fieldset>
+</form>

@@ -2,6 +2,8 @@
 
 require_relative 'config/environment'
 
+require 'utopia/session'
+
 if RACK_ENV == :production
 	# Handle exceptions in production with a error page and send an email notification:
 	use Utopia::Exceptions::Handler
@@ -26,10 +28,9 @@ use Utopia::Redirection::DirectoryIndex
 use Utopia::Redirection::Errors,
 	404 => '/errors/file-not-found'
 
-use Utopia::Localization,
-	:default_locale => 'en',
-	:locales => ['en', 'de', 'ja', 'zh'],
-	:nonlocalized => ['/_static/', '/_cache/']
+use Utopia::Session,
+	:expires_after => 3600 * 24,
+	:secret => 'f267f5ffd7251d7d2e59f7fcffded3ed2f6ec398'
 
 use Utopia::Controller,
 	cache_controllers: (RACK_ENV == :production),
