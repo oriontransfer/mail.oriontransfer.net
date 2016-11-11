@@ -14,14 +14,14 @@
 			<?r Domain.all.each do |domain| ?>
 			<tr>
 				<th></th>
-				<th>#{domain.disk_usage}</th>
+				<th>#{domain.disk_usage_string}</th>
 				<th>#{domain.name}</th>
 				<th></th>
 			</tr>
 				<?r domain.accounts.each do |account| ?>
 				<tr data-id="#{account.id}">
 					<th class="actions"><a class="button edit" href="edit?id=#{account.id}"><i class="fa fa-edit"></i></a></th>
-					<td>#{account.disk_usage}</td>
+					<td>#{account.disk_usage_string}</td>
 					<td>#{account.description}</td>
 					<th class="actions"><input type="checkbox" class="selected" /></th>
 				</tr>

@@ -58,10 +58,8 @@ class Account < ActiveRecord::Base
 		return "/srv/mail/#{domain.name}/#{local_part}/"
 	end
 
-	def disk_usage
-		if File.exist? home_path
-			`sudo du -hs #{home_path.dump}`.split(/\s+/).first
-		end
+	def disk_usage_string
+		`sudo du -hs #{home_path.dump}`.split(/\s+/).first
 	end
 
 	def email_address
@@ -110,10 +108,8 @@ class Domain < ActiveRecord::Base
 		"/srv/mail/#{name}"
 	end
 
-	def disk_usage
-		if File.exist? home_path
-			`sudo du -hs #{home_path.dump}`.split(/\s+/).first
-		end
+	def disk_usage_string
+		`sudo du -hs #{home_path.dump}`.split(/\s+/).first
 	end
 	
 	def self.setup_mail_account(full_name, local_part, domain_name, password)
