@@ -43,14 +43,13 @@ end
 class Account < ActiveRecord::Base
 	belongs_to :domain
 	
-	def password=(plaintext)
-		self[:password] = encode_password(plaintext)
-	end
-	
 	attr :password_plaintext
 	
 	def password_plaintext=(plaintext)
-		self.password = plaintext if plaintext
+		if plaintext
+			self.password = encode_password(plaintext)
+		end
+		
 		@password_plaintext = plaintext
 	end
 	
@@ -121,7 +120,7 @@ class Domain < ActiveRecord::Base
 		end
 
 		account.name = full_name
-		account.password = password
+		account.password_plaintext = password
 		account.save
 
 		return account
