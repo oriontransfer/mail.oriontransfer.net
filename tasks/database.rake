@@ -22,8 +22,8 @@ load 'active_record/railties/databases.rake'
 
 task :deploy => :environment do
 	if ActiveRecord::Base.connection.tables.empty?
-		Rake::Tasks['db:setup'].invoke
+		Rake::Task['db:setup'].invoke
 	else
-		Rake::Tasks['db:migrate'].invoke
+		Rake::Task['db:migrate'].invoke
 	end
 end
