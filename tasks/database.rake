@@ -5,8 +5,7 @@ namespace :db do
 	task :environment => :environment do
 		database_tasks = ActiveRecord::Tasks::DatabaseTasks
 		
-		db_dir = File.expand_path('../db', __FILE__)
-		config_dir = File.expand_path('../config', __FILE__)
+		db_dir = File.expand_path('../db', __dir__)
 		
 		database_tasks.env = RACK_ENV
 		database_tasks.db_dir = db_dir
@@ -21,7 +20,7 @@ end
 load 'active_record/railties/databases.rake'
 
 task :deploy => :environment do
-	if ActiveRecord::Base.connection.tables.empty?
+	if ActiveRecord::Base.connection.data_sources.empty?
 		Rake::Task['db:setup'].invoke
 	else
 		Rake::Task['db:migrate'].invoke
