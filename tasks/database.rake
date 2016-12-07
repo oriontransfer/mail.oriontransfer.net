@@ -10,7 +10,7 @@ namespace :db do
 		
 		database_tasks.env = RACK_ENV
 		database_tasks.db_dir = db_dir
-		database_tasks.database_configuration = YAML.load(File.read(File.join(config_dir, 'database.yml')))
+		database_tasks.database_configuration = ActiveRecord::Base.configurations
 		database_tasks.migrations_paths = File.join(db_dir, 'migrate')
 
 		#ActiveRecord::Base.configurations = DatabaseTasks.database_configuration
