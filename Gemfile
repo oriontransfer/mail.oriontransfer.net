@@ -5,6 +5,14 @@ gem "utopia", "~> 1.8.3"
 # gem "utopia-tags-gallery"
 # gem "utopia-tags-google-analytics"
 
+gem "activerecord", "~> 5.0"
+gem "activerecord-migrations"
+gem "activerecord-rack"
+
+gem "mysql2"
+
+gem "rainbow", "~> 2.0.0"
+
 gem "rake"
 gem "bundler"
 

@@ -10,17 +10,7 @@ RACK_ENV = ENV.fetch('RACK_ENV', :development).to_sym unless defined? RACK_ENV
 require 'active_record'
 require 'mysql2'
 
-ActiveRecord::Base.configurations = {
-	'production' => {
-		adapter: "mysql2",
-		database: "vmail",
-		username: "vmail",
-		password: "JALRtzMvm9b6DKwz",
-		strict: true,
-	}
-}
-
-DATABASE_ENV = (ENV['DATABASE_ENV'] || :production).to_sym
+require_relative '../db/environment'
 
 # Connect to database:
 unless ActiveRecord::Base.connected?

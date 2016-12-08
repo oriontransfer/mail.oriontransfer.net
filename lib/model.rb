@@ -53,8 +53,12 @@ class Account < ActiveRecord::Base
 		@password_plaintext = plaintext
 	end
 	
+	def self.mail_root
+		@mail_root ||= self.connection_config['mail_root']
+	end
+	
 	def home_path
-		return "/srv/mail/#{domain.name}/#{local_part}/"
+		File.join(self.class.mail_root, domain.name, local_part)
 	end
 
 	def disk_usage_string
@@ -103,8 +107,12 @@ class Domain < ActiveRecord::Base
 		return postmaster
 	end
 	
+	def self.mail_root
+		@mail_root ||= self.connection_config['mail_root']
+	end
+	
 	def home_path
-		"/srv/mail/#{name}"
+		File.join(self.class.mail_root, name)
 	end
 
 	def disk_usage_string

@@ -32,6 +32,10 @@ use Utopia::Session,
 	:expires_after => 3600 * 24,
 	:secret => 'f267f5ffd7251d7d2e59f7fcffded3ed2f6ec398'
 
+unless RACK_ENV == :test
+	use ActiveRecord::Rack::ConnectionManagement
+end
+
 use Utopia::Controller,
 	cache_controllers: (RACK_ENV == :production),
 	base: Utopia::Controller::Base
