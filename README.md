@@ -22,6 +22,115 @@ Setup `sudo` for computing disk usage, e.g. in `/etc/sudoers.d/http`:
 http  ALL=(ALL) NOPASSWD: /usr/bin/du
 ```
 
+### Dovecot Setup
+
+You'll want to configure Dovecot to interface with MySQL:
+
+#### `/etc/dovecot/dovecot.conf`
+
+	auth_mechanisms = plain login
+	mail_location = mdbox:~/mail.mdbox
+	mail_uid = vmail
+	mail_gid = vmail
+	
+	passdb {
+		driver = sql
+		args = /etc/dovecot/dovecot-sql.conf
+	}
+	
+	protocols = imap
+	
+	service imap-login {
+		client_limit = 512
+		inet_listener imap {
+		port = 0
+		}
+		process_limit = 8
+		service_count = 0
+		vsz_limit = 128 M
+	}
+	
+	ssl_cert = </etc/ssl/private/mail.oriontransfer.net.pem
+	ssl_key = </etc/ssl/private/mail.oriontransfer.net.key
+	
+	userdb {
+		driver = sql
+		args = /etc/dovecot/dovecot-sql.conf
+	}
+	
+	verbose_proctitle = yes
+	
+	service auth {
+		unix_listener /var/spool/postfix/private/auth {
+			mode = 0660
+			# Assuming the default Postfix user and group
+			user = postfix
+			group = postfix
+		}
+	}
+	
+	protocol lda {
+		mail_plugins = $mail_plugins sieve
+	}
+	
+	plugin {
+		zlib_save = xz
+		zlib_save_level = 4
+	}
+
+	# Enable zlib plugin globally for reading/writing:
+	mail_plugins = $mail_plugins zlib
+
+	namespace {
+		separator = /
+		inbox = yes
+	}
+
+#### `/etc/dovecot/dovecot-sql.conf`
+
+	driver = mysql
+
+	connect = host=localhost dbname=vmail user=vmail password=foobar
+
+	password_query = SELECT password FROM accounts LEFT JOIN domains ON accounts.domain_id = domains.id WHERE accounts.local_part = '%n' AND domains.name = '%d' AND domains.is_enabled = 1 AND accounts.is_enabled = 1
+
+	user_query = SELECT mail_location AS mail, concat('/srv/mail/', domains.name, '/', accounts.local_part) AS home, 'vmail' AS uid, 'vmail' AS gid FROM accounts LEFT JOIN domains ON accounts.domain_id = domains.id WHERE accounts.local_part = '%n' AND domains.name = '%d' AND domains.is_enabled = 1 AND accounts.is_enabled = 1
+
+	# For using doveadm -A:
+	iterate_query = SELECT concat(accounts.local_part, '@', domains.name) AS username FROM accounts LEFT JOIN domains ON accounts.domain_id = domains.id WHERE domains.is_enabled = 1 AND accounts.is_enabled = 1
+
+### Postfix Setup
+
+Postfix talks to Dovecot for authentication and virtual mailbox lookup:
+
+#### `/etc/postfix/master.cf`
+
+Talk to Dovecot for auth:
+
+	smtpd_sasl_type = dovecot
+	smtpd_sasl_path = /var/spool/postfix/private/auth
+	smtpd_sasl_auth_enable = yes
+	smtpd_use_tls=yes
+	smtpd_tls_auth_only=yes
+	smtpd_tls_cert_file=/etc/ssl/private/mail.oriontransfer.net.pem
+	smtpd_tls_key_file=/etc/ssl/private/mail.oriontransfer.net.key
+	smtpd_tls_session_cache_database = btree:/var/lib/postfix/smtpd_scache
+	smtpd_tls_session_cache_timeout = 3600s
+
+#### `/etc/postfix/main.cf`
+
+Use dovecot for local delivery, filter it via spamc.
+
+	dovecot   unix  -       n       n       -       -       pipe
+	  flags=DRhu user=vmail:vmail argv=/usr/bin/vendor_perl/spamc -f -u spamd -e /usr/lib/dovecot/deliver -f ${sender} -d ${user}@${nexthop}
+
+#### `/etc/postfix/virtual_mailbox_maps.cf`
+
+	user = vmail
+	password = foobar
+	dbname = vmail
+	query = SELECT 1 FROM accounts LEFT JOIN domains ON accounts.domain_id = domains.id WHERE accounts.local_part = '%u' AND domains.name = '%d' AND domains.is_enabled = 1
+
 ## Contributing
 
 1. Fork it
