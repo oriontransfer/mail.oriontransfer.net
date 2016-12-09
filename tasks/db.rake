@@ -1,5 +1,5 @@
 
 require 'active_record/migrations/tasks'
-ActiveRecord::Migrations.root = File.expand_path("../db", __dir__)
+ActiveRecord::Migrations.root = File.dirname(__dir__)
 
 task :deploy => 'db:deploy'
