@@ -1,17 +1,15 @@
 test:
-  adapter: sqlite3
-  database: ":memory:"
-  mail_root: '/tmp/mail_root'
+  adapter: mysql2
+  database: "vmail_test"
+  mail_root: 'db/mail_root'
 
 development:
-  adapter: sqlite3
-  database: "db/development.sqlite3"
-  mail_root: '/tmp/mail_root'
+  adapter: mysql2
+  database: "vmail_development"
+  mail_root: 'db/mail_root'
 
 production:
   adapter: mysql2
   database: vmail
-  username: vmail
-  password: JALRtzMvm9b6DKwz
   strict: true
   mail_root: '/srv/mail'

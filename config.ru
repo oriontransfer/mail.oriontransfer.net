@@ -3,6 +3,7 @@
 require_relative 'config/environment'
 
 require 'utopia/session'
+require 'active_record/rack'
 
 if RACK_ENV == :production
 	# Handle exceptions in production with a error page and send an email notification:
@@ -30,7 +31,7 @@ use Utopia::Redirection::Errors,
 
 use Utopia::Session,
 	:expires_after => 3600 * 24,
-	:secret => 'f267f5ffd7251d7d2e59f7fcffded3ed2f6ec398'
+	:secret => ENV['UTOPIA_SESSION_SECRET']
 
 unless RACK_ENV == :test
 	use ActiveRecord::Rack::ConnectionManagement

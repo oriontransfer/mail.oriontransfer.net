@@ -11,9 +11,9 @@ on 'login' do |request|
 		
 		account = Account.for_email_address(email)
 		
-		fail!(:unauthorized, "account does not have admin access") unless account.is_admin
+		fail!(:unauthorized, "account does not have admin access") unless account&.is_admin
 		
-		if account and account.plaintext_authenticate(password)
+		if account&.plaintext_authenticate(password)
 			request.session[:account_id] = account.id
 			
 			goto! "admin/accounts/index"

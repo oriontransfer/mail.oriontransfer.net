@@ -54,7 +54,7 @@ class Account < ActiveRecord::Base
 	end
 	
 	def self.mail_root
-		@mail_root ||= self.connection_config['mail_root']
+		@mail_root ||= self.connection_config[:mail_root]
 	end
 	
 	def home_path
@@ -62,7 +62,7 @@ class Account < ActiveRecord::Base
 	end
 
 	def disk_usage_string
-		`sudo du -hs #{home_path.dump}`.split(/\s+/).first
+		`sudo -n du -hs #{home_path.dump}`.split(/\s+/).first
 	end
 
 	def email_address
@@ -108,7 +108,7 @@ class Domain < ActiveRecord::Base
 	end
 	
 	def self.mail_root
-		@mail_root ||= self.connection_config['mail_root']
+		@mail_root ||= self.connection_config[:mail_root]
 	end
 	
 	def home_path
@@ -116,7 +116,7 @@ class Domain < ActiveRecord::Base
 	end
 
 	def disk_usage_string
-		`sudo du -hs #{home_path.dump}`.split(/\s+/).first
+		`sudo -n du -hs #{home_path.dump}`.split(/\s+/).first
 	end
 	
 	def self.setup_mail_account(full_name, local_part, domain_name, password)
