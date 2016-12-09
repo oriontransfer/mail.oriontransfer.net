@@ -11,5 +11,6 @@ development:
 production:
   adapter: mysql2
   database: vmail
+  username: http
   strict: true
   mail_root: '/srv/mail'
