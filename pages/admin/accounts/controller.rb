@@ -14,7 +14,9 @@ on 'new' do |request, path|
 	@account.password_plaintext = (0..8).map {PASSWORD_CHARACTERS.sample}.join
 	
 	if request.post?
-		update_from_form(@account, request)
+		attributes = AccountAttributes.select(request.params)
+		
+		@account.update_attributes(attributes)
 		
 		@account.save
 		
@@ -27,6 +29,7 @@ on 'edit' do |request, path|
 	
 	if request.post?
 		attributes = AccountAttributes.select(request.params)
+		
 		@account.update_attributes(attributes)
 		
 		@account.save
