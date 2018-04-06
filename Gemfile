@@ -2,8 +2,11 @@
 source "https://rubygems.org"
 
 gem "utopia", "~> 2.3.0"
-# gem "utopia-tags-gallery"
-# gem "utopia-tags-google-analytics"
+# gem "utopia-gallery"
+# gem "utopia-analytics"
+
+gem "rake"
+gem "bundler"
 
 gem "activerecord", "~> 5.0"
 gem "activerecord-migrations"
@@ -12,20 +15,18 @@ gem "activerecord-rack"
 
 gem "mysql2"
 
-gem "rainbow", "~> 2.0.0"
-
-gem "rake"
-gem "bundler"
+gem "rainbow", "~> 2.1"
 
 gem "trenni-formatters", "~> 2.0"
 gem "latinum", "~> 1.0"
 gem "mapping", "~> 1.0"
 
+gem "rack-freeze", "~> 1.2"
+
 group :development do
-	gem "sqlite3"
-	
 	# For `rake server`:
-	gem "puma"
+	gem "guard-falcon", require: false
+	gem 'guard-rspec', require: false
 	
 	# For `rake console`:
 	gem "pry"
