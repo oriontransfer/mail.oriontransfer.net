@@ -8,7 +8,7 @@
 			<dl>
 				#{f.output :field => :email_address, :title => 'Login name'}
 				
-				#{f.input :field => :password_plaintext, :type => :password, :title => 'Password', :minlength => 8}
+				#{f.input :field => :password_plaintext, :type => :password, :title => 'New Password', :minlength => 8}
 			</dl>
 		</fieldset>
 		
