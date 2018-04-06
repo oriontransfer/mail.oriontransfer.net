@@ -1,5 +1,5 @@
-<page>
-	<heading>Login</heading>
+<content:page>
+	<content:heading>Login</content:heading>
 	
 	<form class="basic" method="post" action="#">
 		<fieldset>
@@ -12,4 +12,4 @@
 			</dl>
 		</fieldset>
 	</form>
-</page>
+</content:page>

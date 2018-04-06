@@ -13,9 +13,6 @@ require 'mysql2'
 require_relative '../db/environment'
 
 # Connect to database:
-unless ActiveRecord::Base.connected?
-	ActiveRecord::Base.establish_connection(DATABASE_ENV)
-end
+ActiveRecord::Base.setup_connection(DATABASE_ENV)
 
-require 'model'
-require 'formatters'
+require 'email/formatters'

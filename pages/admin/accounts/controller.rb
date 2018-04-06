@@ -9,7 +9,7 @@ AccountAttributes = Attributes.new(
 )
 
 on 'new' do |request, path|
-	@account = Account.new
+	@account = VMail::Account.new
 	
 	@account.password_plaintext = (0..8).map {PASSWORD_CHARACTERS.sample}.join
 	
@@ -25,7 +25,7 @@ on 'new' do |request, path|
 end
 
 on 'edit' do |request, path|
-	@account = Account.find(request[:id].to_i)
+	@account = VMail::Account.find(request[:id].to_i)
 	
 	if request.post?
 		attributes = AccountAttributes.select(request.params)
@@ -40,11 +40,11 @@ end
 
 on 'delete' do |request|
 	fail!(:forbidden) unless request.post?
-	puts request.params.inspect
 	
 	if values = request.params['rows'].values
 		ids = values.collect{|row| row['id']}
-		Account.destroy(ids)
+		
+		VMail::Account.destroy(ids)
 	end
 	
 	succeed!

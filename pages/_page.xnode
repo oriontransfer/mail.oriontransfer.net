@@ -5,9 +5,9 @@
 		<?r response.do_not_cache! ?>
 		
 		<?r if title = self[:title] ?>
-			<title>#{title.gsub(/<.*?>/, "")} - Utopia</title>
+			<title>#{title.gsub(/<.*?>/, "")} - mail.oriontransfer.net</title>
 		<?r else ?>
-			<title>Utopia</title>
+			<title>mail.oriontransfer.net</title>
 		<?r end ?>
 		
 		<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" />
@@ -26,7 +26,7 @@
 		</div>
 
 		<div id="page">
-			<content />
+			<utopia:content />
 		</div>
 	</body>
 </html>

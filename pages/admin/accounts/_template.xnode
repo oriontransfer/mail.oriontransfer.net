@@ -1,11 +1,11 @@
 <?r
-	f = FormFormatter.new(object: attributes[:account])
+	f = VMail::FormFormatter.new(object: attributes[:account])
 	
 ?><form class="basic editor" method="post" action="#">
 	<fieldset><legend>Domain</legend>
 		<dl>
 		<?r f.select :field => :domain_id do |select| ?>
-			<?r Domain.find_each do |domain| ?>
+			<?r VMail::Domain.find_each do |domain| ?>
 				#{select.item :title => domain.name, :value => domain.id}
 			<?r end ?>
 		<?r end ?>

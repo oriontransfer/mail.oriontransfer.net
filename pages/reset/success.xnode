@@ -1,0 +1,5 @@
+<content:page>
+	<content:heading>Password Reset</content:heading>
+	
+	<p>The password was successfully reset.</p>
+</content:page>

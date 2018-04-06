@@ -1,5 +1,6 @@
 
-require_relative '../lib/model'
+require_relative '../lib/mail/domain'
+require_relative '../lib/mail/account'
 
 localhost = Domain.create(
 	name: "localhost",

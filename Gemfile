@@ -1,12 +1,13 @@
 
 source "https://rubygems.org"
 
-gem "utopia", "~> 1.9.4"
+gem "utopia", "~> 2.3.0"
 # gem "utopia-tags-gallery"
 # gem "utopia-tags-google-analytics"
 
 gem "activerecord", "~> 5.0"
 gem "activerecord-migrations"
+gem "activerecord-configurations"
 gem "activerecord-rack"
 
 gem "mysql2"
