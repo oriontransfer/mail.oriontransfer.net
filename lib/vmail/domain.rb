@@ -1,4 +1,6 @@
 
+require 'active_record'
+
 module VMail
 	class Domain < ActiveRecord::Base
 		has_many :accounts, :dependent => :destroy

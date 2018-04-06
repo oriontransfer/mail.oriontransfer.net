@@ -1,0 +1,5 @@
+<content:page>
+	<content:heading>New Password Reset</content:heading>
+	
+	#{partial 'content:template', password_reset: controller[:password_reset]}
+</content:page>

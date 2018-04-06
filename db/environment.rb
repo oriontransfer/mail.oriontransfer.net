@@ -14,6 +14,8 @@ class ActiveRecord::Base
 		username 'http'
 		strict true
 		mail_root '/srv/mail'
+		
+		domain 'https://mail.oriontransfer.net'
 	end
 
 	configure(:development, parent: :production) do
@@ -23,5 +25,7 @@ class ActiveRecord::Base
 	
 	configure(:test, parent: :production) do
 		database 'vmail_test'
+		
+		domain nil
 	end
 end

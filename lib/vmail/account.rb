@@ -9,6 +9,8 @@ module VMail
 	class Account < ActiveRecord::Base
 		belongs_to :domain
 		
+		has_many :password_resets
+		
 		attr :password_plaintext
 		
 		def password_plaintext=(plaintext)

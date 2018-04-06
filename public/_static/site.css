@@ -185,7 +185,7 @@ form fieldset.footer {
 /* Forms v2.1 */
 
 form.basic {
-	margin: auto;
+	margin: 4rem auto 4rem auto;
 	width: 75%;
 	background-color: inherit;
 	box-shadow: 0 0 3rem rgba(0, 0, 0, 0.3);

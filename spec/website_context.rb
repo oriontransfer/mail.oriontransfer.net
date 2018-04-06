@@ -1,5 +1,6 @@
 
 require 'rack/test'
+require 'trenni/uri'
 
 RSpec.shared_context "website" do
 	include Rack::Test::Methods

@@ -1,0 +1,19 @@
+<content:page>
+	<content:heading>Password Reset</content:heading>
+	
+	<?r
+		f = VMail::FormFormatter.new(object: attributes[:account])
+	?><form class="basic editor" method="post" action="#">
+		<fieldset><legend>Login Details</legend>
+			<dl>
+				#{f.output :field => :email_address, :title => 'Login name'}
+				
+				#{f.input :field => :password_plaintext, :type => :password, :title => 'Password', :minlength => 8}
+			</dl>
+		</fieldset>
+		
+		<fieldset class="footer">
+			#{f.submit}
+		</fieldset>
+	</form>
+</content:page>

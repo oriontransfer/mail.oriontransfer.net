@@ -15,4 +15,4 @@ require_relative '../db/environment'
 # Connect to database:
 ActiveRecord::Base.setup_connection(DATABASE_ENV)
 
-require 'vmail/formatters'
+require 'vmail'

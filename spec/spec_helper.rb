@@ -16,6 +16,11 @@ if ENV['COVERAGE']
 	end
 end
 
+require 'pry'
+
+DATABASE_ENV ||= :test
+require_relative '../config/environment'
+
 require 'bundler/setup'
 require 'utopia'
 

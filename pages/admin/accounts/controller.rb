@@ -1,7 +1,7 @@
 
 prepend Actions
 
-AccountAttributes = Attributes.new(
+AccountAttributes = VMail::Attributes.new(
 	:domain_id,
 	:name, :local_part, :forward, :password_plaintext,
 	:mail_location,

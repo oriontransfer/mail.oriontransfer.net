@@ -10,27 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20180406064552) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.string   "local_part",                    null: false, collation: "utf8_unicode_ci"
-    t.integer  "domain_id",                     null: false
-    t.string   "forward",                                    collation: "utf8_unicode_ci"
-    t.string   "name",                          null: false, collation: "utf8_unicode_ci"
-    t.string   "password",                                   collation: "utf8_unicode_ci"
-    t.string   "mail_location",                              collation: "utf8_unicode_ci"
-    t.boolean  "is_enabled",    default: true,  null: false
-    t.boolean  "is_admin",      default: false, null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.index ["domain_id", "local_part"], name: "UNIQUE_EMAIL", unique: true, using: :btree
+    t.string "local_part", null: false, collation: "utf8_unicode_ci"
+    t.integer "domain_id", null: false
+    t.string "forward", collation: "utf8_unicode_ci"
+    t.string "name", null: false, collation: "utf8_unicode_ci"
+    t.string "password", collation: "utf8_unicode_ci"
+    t.string "mail_location", collation: "utf8_unicode_ci"
+    t.boolean "is_enabled", default: true, null: false
+    t.boolean "is_admin", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["domain_id", "local_part"], name: "UNIQUE_EMAIL", unique: true
   end
 
   create_table "domains", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.string   "name",       null: false, collation: "utf8_unicode_ci"
-    t.boolean  "is_enabled", null: false
+    t.string "name", null: false, collation: "utf8_unicode_ci"
+    t.boolean "is_enabled", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "password_resets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "account_id"
+    t.string "token", null: false
+    t.boolean "used_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_password_resets_on_account_id"
   end
 
 end

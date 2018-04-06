@@ -9,7 +9,7 @@ on 'login' do |request|
 		
 		fail!(:unprocessible, "email and password are required") unless email and password
 		
-		account = Account.for_email_address(email)
+		account = VMail::Account.for_email_address(email)
 		
 		fail!(:unauthorized, "account does not have admin access") unless account&.is_admin
 		

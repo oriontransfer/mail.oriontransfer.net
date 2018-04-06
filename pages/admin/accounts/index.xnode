@@ -1,5 +1,5 @@
-<page>
-	<heading>Accounts</heading>
+<content:page>
+	<content:heading>Accounts</content:heading>
 	
 	<table class="listing">
 		<thead>
@@ -29,4 +29,4 @@
 			<?r end ?>
 		</tbody>
 	</table>
-</page>
+</content:page>

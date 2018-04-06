@@ -1,0 +1,18 @@
+<?r
+	f = VMail::FormFormatter.new(object: attributes[:password_reset])
+	
+?><form class="basic editor" method="post" action="#">
+	<fieldset><legend>Account</legend>
+		<dl>
+		<?r f.select :field => :account_id do |select| ?>
+			<?r VMail::Account.find_each do |account| ?>
+				#{select.item :title => account.email_address, :value => account.id}
+			<?r end ?>
+		<?r end ?>
+		</dl>
+	</fieldset>
+	
+	<fieldset class="footer">
+		#{f.submit}
+	</fieldset>
+</form>
