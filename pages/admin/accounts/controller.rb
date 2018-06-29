@@ -11,7 +11,7 @@ AccountAttributes = VMail::Attributes.new(
 on 'new' do |request, path|
 	@account = VMail::Account.new
 	
-	@account.password_plaintext = (0..8).map {PASSWORD_CHARACTERS.sample}.join
+	@account.password_plaintext = VMail::Account.generate_password
 	
 	if request.post?
 		attributes = AccountAttributes.select(request.params)
