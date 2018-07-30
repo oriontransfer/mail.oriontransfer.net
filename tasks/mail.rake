@@ -3,7 +3,7 @@ namespace :mail do
 	task :summary => :environment do
 		require 'rainbow'
 		
-		Domain.find_each do |domain|
+		VMail::Domain.find_each do |domain|
 			domain_color = domain.is_enabled ? :green : :red
 			
 			puts "[#{domain.id}] #{Rainbow(domain.name).foreground(domain_color)} (#{domain.accounts.count} accounts): #{domain.disk_usage_string}"
