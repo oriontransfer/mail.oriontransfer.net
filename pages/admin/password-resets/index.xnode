@@ -18,7 +18,12 @@
 			<?r VMail::PasswordReset.all.includes(:account => :domain).each do |password_reset| ?>
 			<tr>
 				<th></th>
-				<th>#{f.text password_reset.account.email_address}</th>
+				<th><?r if account = password_reset.account ?>
+						#{f.text account.email_address}
+					<?r else ?>
+						(deleted)
+					<?r end ?>
+				</th>
 				<td><a href="#{password_reset.url(nil)}">#{password_reset.url}</a></td>
 				<th>#{f.text password_reset.used_at}</th>
 				<th></th>
