@@ -6,4 +6,4 @@ Bundler.setup
 require 'utopia/setup'
 UTOPIA ||= Utopia.setup
 
-require_relative 'vmail'
+require 'vmail'
