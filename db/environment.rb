@@ -1,5 +1,6 @@
 
-DATABASE_ENV = (ENV['DATABASE_ENV'] || RACK_ENV || :development).to_sym
+require 'active_record'
+require 'mysql2'
 
 require 'active_record/configurations'
 
