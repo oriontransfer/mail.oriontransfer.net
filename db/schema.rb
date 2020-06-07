@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2018_04_06_064552) do
   create_table "password_resets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
     t.string "token", null: false
-    t.boolean "used_at"
+    t.datetime "used_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_password_resets_on_account_id"
