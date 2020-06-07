@@ -14,3 +14,7 @@ end
 def default
 	call 'utopia:development'
 end
+
+def environment
+	require_relative 'config/environment'
+end

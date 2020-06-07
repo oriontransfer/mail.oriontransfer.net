@@ -23,10 +23,11 @@ GEM
     activerecord-configurations (1.0.0)
       activerecord (~> 5.0)
       build-environment (~> 1.3)
-    activerecord-migrations (1.4.0)
+    activerecord-migrations (1.5.0)
       activerecord (>= 5, < 7)
       railties
       rainbow (~> 2.0)
+      variant
     activerecord-rack (1.0.0)
       activerecord (~> 5.0)
       rack
@@ -243,7 +244,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   activerecord-configurations
-  activerecord-migrations
+  activerecord-migrations (~> 1.5)
   activerecord-rack
   async-rspec
   bake

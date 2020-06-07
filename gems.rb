@@ -10,7 +10,7 @@ group :preload do
 	gem 'variant'
 	
 	gem "activerecord"
-	gem "activerecord-migrations"
+	gem "activerecord-migrations", "~> 1.5"
 	gem "activerecord-configurations"
 	gem "activerecord-rack"
 	

@@ -20,12 +20,12 @@ class ActiveRecord::Base
 	end
 
 	configure(:development, parent: :production) do
-		database 'vmail_development'
 		mail_root 'db/mail'
 	end
 	
-	configure(:test, parent: :production) do
-		database 'vmail_test'
+	configure(:testing, parent: :production) do
+		username 'root'
+		password 'root'
 		
 		domain nil
 	end

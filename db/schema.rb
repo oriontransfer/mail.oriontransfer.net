@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180406064552) do
+ActiveRecord::Schema.define(version: 2018_04_06_064552) do
 
-  create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "local_part", null: false, collation: "utf8_unicode_ci"
     t.integer "domain_id", null: false
     t.string "forward", collation: "utf8_unicode_ci"
@@ -26,14 +26,14 @@ ActiveRecord::Schema.define(version: 20180406064552) do
     t.index ["domain_id", "local_part"], name: "UNIQUE_EMAIL", unique: true
   end
 
-  create_table "domains", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  create_table "domains", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false, collation: "utf8_unicode_ci"
     t.boolean "is_enabled", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "password_resets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "password_resets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
     t.string "token", null: false
     t.boolean "used_at"
