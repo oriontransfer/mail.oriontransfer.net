@@ -24,9 +24,7 @@ class ActiveRecord::Base
 	end
 	
 	configure(:testing, parent: :production) do
-		username 'root'
-		password 'root'
-		
+		username 'testing'
 		domain nil
 	end
 end

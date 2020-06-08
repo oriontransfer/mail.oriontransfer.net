@@ -39,6 +39,7 @@ jobs:
     - name: Setup database
       run: |
         sudo systemctl start mysql
+        mysql -uroot -proot -e "CREATE USER 'testing'@'localhost'; GRANT ALL ON *.* TO 'testing'@'localhost'; FLUSH PRIVILEGES;"
         VARIANT=testing bundle exec bake activerecord:deploy
     
     - name: Run tests
