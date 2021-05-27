@@ -30,6 +30,20 @@ module VMail
 			
 			return into
 		end
+		
+		def assign(parameters, object)
+			@keys.each do |key|
+				value = parameters[key.to_s]
+				
+				if value
+					if value.empty?
+						value = nil
+					end
+					
+					object.public_send(:"#{key}=", value)
+				end
+			end
+		end
 	end
 	
 	class ViewFormatter < Trenni::Formatters::Formatter

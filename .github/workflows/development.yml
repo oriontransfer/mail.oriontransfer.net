@@ -10,39 +10,45 @@ jobs:
           - ubuntu
         
         ruby:
-          - 2.6
-          - 2.7
+          - 3.0
     
     runs-on: ${{matrix.os}}-latest
     
-    steps:
-    - uses: actions/checkout@v1
+    services:
+      mariadb:
+        image: mariadb
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_USER: test
+          MYSQL_PASSWORD: test
+          MYSQL_DATABASE: test
+          MYSQL_ROOT_PASSWORD: test
+        options: >-
+          --health-cmd "mysqladmin ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 20
     
+    steps:
+    - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{matrix.ruby}}
+        bundler-cache: true
     
-    - uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{runner.os}}-${{matrix.ruby}}-${{hashFiles('**/Gemfile.lock')}}
-        restore-keys: |
-          ${{runner.os}}-${{matrix.ruby}}-
-    
-    - name: Bundle install
+    - name: Installing dependencies (ubuntu)
+      if: matrix.os == 'ubuntu'
       run: |
-        sudo apt-get install pkg-config
-        gem install bundler:2.1.4
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
+        sudo systemctl stop mysql
+        sudo apt-get install libmariadb-dev
     
     - name: Setup database
       run: |
-        sudo systemctl start mysql
-        mysql -uroot -proot -e "CREATE USER 'testing'@'localhost'; GRANT ALL ON *.* TO 'testing'@'localhost'; FLUSH PRIVILEGES;"
-        VARIANT=testing bundle exec bake activerecord:deploy
+        VARIANT=testing bundle exec bake migrate
     
     - name: Run tests
+      timeout-minutes: 5
       run: ${{matrix.env}} bundle exec rspec
   
   deploy:

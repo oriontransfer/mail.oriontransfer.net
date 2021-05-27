@@ -9,19 +9,18 @@ group :preload do
 	
 	gem 'variant'
 	
-	gem "activerecord"
-	gem "activerecord-migrations", "~> 1.5"
-	gem "activerecord-configurations"
-	gem "activerecord-rack"
+	gem "db"
+	gem "db-mariadb"
+	gem "db-model", git: "https://github.com/socketry/db-model"
+	gem "db-migrate", git: "https://github.com/socketry/db-migrate"
 	
-	gem "mysql2"
+	gem "migrate"
 	gem "latinum", "~> 1.0"
 	gem "mapping", "~> 1.0"
 	
 	gem "trenni-formatters", "~> 2.0"
 end
 
-gem 'rake'
 gem 'bake'
 gem 'bundler'
 gem 'rack-test'
