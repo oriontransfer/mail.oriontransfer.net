@@ -1,10 +1,10 @@
 <?r
-	f = VMail::FormFormatter.new(object: attributes[:account])
+	form = VMail::FormFormatter.for(attributes[:account])
 	
 ?><form class="basic editor" method="post" action="#">
 	<fieldset><legend>Domain</legend>
 		<dl>
-		<?r f.select :field => :domain_id do |select| ?>
+		<?r form.select :field => :domain_id do |select| ?>
 			<?r VMail::Domain.find_each do |domain| ?>
 				#{select.item :title => domain.name, :value => domain.id}
 			<?r end ?>
@@ -14,21 +14,21 @@
 	
 	<fieldset><legend>Account Details</legend>
 		<dl>
-			#{f.input :field => :name}
+			#{form.input :field => :name}
 			
-			#{f.input :field => :local_part}
-			#{f.input :field => :forward}
+			#{form.input :field => :local_part}
+			#{form.input :field => :forward}
 			
-			#{f.input :field => :password_plaintext, :title => 'Password', :minlength => 8}
+			#{form.input :field => :password_plaintext, :title => 'Password', :minlength => 8}
 			
-			#{f.input :field => :mail_location}
+			#{form.input :field => :mail_location}
 			
-			#{f.checkbox :field => :is_enabled}
-			#{f.checkbox :field => :is_admin}
+			#{form.checkbox :field => :is_enabled}
+			#{form.checkbox :field => :is_admin}
 		</dl>
 	</fieldset>
 	
 	<fieldset class="footer">
-		#{f.submit}
+		#{form.submit}
 	</fieldset>
 </form>
