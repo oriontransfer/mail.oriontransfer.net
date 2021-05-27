@@ -1,15 +1,40 @@
 
 require_relative 'domain'
 
+require 'db/model/record'
+
 require 'securerandom'
 require 'digest/sha1'
 require 'base64'
 
 module VMail
-	class Account < ActiveRecord::Base
-		belongs_to :domain
+	class Account
+		include DB::Model::Record
+		@type = :accounts
 		
-		has_many :password_resets
+		property :id
+		
+		property :local_part
+		property :domain_id
+		
+		property :forward
+		property :name
+		property :password
+		property :mail_location
+		
+		property :is_enabled
+		property :is_admin
+		
+		property :created_at
+		property :updated_at
+		
+		def domain
+			scope(Domain, id: self.domain_id)
+		end
+		
+		def password_resets
+			scope(PasswordReset, account_id: self.id)
+		end
 		
 		attr :password_plaintext
 		
@@ -21,20 +46,18 @@ module VMail
 			@password_plaintext = plaintext
 		end
 		
-		def self.mail_root
-			@mail_root ||= self.connection_config[:mail_root]
+		def home_path
+			File.join(MAIL_ROOT, domain.name, local_part)
 		end
 		
-		def home_path
-			File.join(self.class.mail_root, domain.name, local_part)
-		end
-
 		def disk_usage_string
 			`sudo -n du -hs #{home_path.dump}`.split(/\s+/).first
 		end
-
+		
 		def email_address
-			return "#{local_part}@#{domain.name}"
+			if domain = self.domain.first
+				return "#{local_part}@#{domain.name}"
+			end
 		end
 		
 		def description
@@ -66,14 +89,24 @@ module VMail
 		def self.generate_password
 			(0..12).map {PASSWORD_CHARACTERS.sample}.join
 		end
-
+		
+		def flatten!
+			self.created_at ||= Time.now
+			
+			if @changed.any?
+				self.updated_at = Time.now
+			end
+			
+			super
+		end
+		
 		private
-
+		
 		# Generate 16 hex characters of random
 		def generate_salt
 			SecureRandom.hex(16)
 		end
-
+		
 		# Hash the password using the given salt. If no salt is supplied, use a new
 		# one.
 		def encode_password(plaintext, salt=generate_salt)
@@ -83,10 +116,10 @@ module VMail
 			raise ArgumentError.new("Salt must be at least 8 characters") if salt.size < 8
 			
 			ssha = Digest::SHA1.digest(plaintext+salt) + salt
-
+			
 			return "{SSHA}" + Base64.strict_encode64(ssha).chomp
 		end
-
+		
 		# Check the supplied password against the given hash and return true if they
 		# match, else false.
 		def check_password(password, ssha)

@@ -1,30 +1,22 @@
 
-require 'active_record'
-require 'mysql2'
+require 'db/client'
+require 'db/mariadb'
 
-require 'active_record/configurations'
-
-class ActiveRecord::Base
-	extend ActiveRecord::Configurations
-	
-	configure(:production) do
-		prefix 'vmail'
-		adapter 'mysql2'
-		
-		database 'vmail'
-		username 'http'
-		strict true
-		mail_root '/srv/mail'
-		
-		domain 'https://mail.oriontransfer.net'
-	end
-
-	configure(:development, parent: :production) do
-		mail_root 'db/mail'
+module VMail
+	case Variant.default
+	when :production
+		MAIL_ROOT = "/srv/mail"
+		DOMAIN = 'https://mail.oriontransfer.net'
+		CREDENTIALS = {username: 'http', database: 'vmail'}
+	when :development
+		MAIL_ROOT = "db/mail"
+		DOMAIN = 'https://localhost'
+		CREDENTIALS = {username: 'test', password: 'test', database: 'vmail_development'}
+	when :testing
+		MAIL_ROOT = "db/mail"
+		DOMAIN = 'https://localhost'
+		CREDENTIALS = {username: 'test', password: 'test', database: 'test', host: '127.0.0.1'}
 	end
 	
-	configure(:testing, parent: :production) do
-		username 'testing'
-		domain nil
-	end
+	DATABASE = DB::Client.new(DB::MariaDB::Adapter.new(**CREDENTIALS))
 end
