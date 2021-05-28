@@ -36,12 +36,8 @@ module VMail
 			return postmaster
 		end
 		
-		def self.mail_root
-			@mail_root ||= self.connection_config[:mail_root]
-		end
-		
 		def home_path
-			File.join(self.class.mail_root, name)
+			File.join(MAIL_ROOT, name)
 		end
 		
 		def disk_usage_string

@@ -20,8 +20,6 @@ on 'index' do |request|
 			AccountAttributes.assign(request.params, @account)
 			@account.save
 			
-			pp @account
-			
 			redirect! 'success'
 		end
 	end

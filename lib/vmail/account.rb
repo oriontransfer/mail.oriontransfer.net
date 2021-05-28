@@ -47,7 +47,9 @@ module VMail
 		end
 		
 		def home_path
-			File.join(MAIL_ROOT, domain.name, local_part)
+			if domain = self.domain.first
+				File.join(MAIL_ROOT, domain.name, local_part)
+			end
 		end
 		
 		def disk_usage_string
@@ -65,18 +67,6 @@ module VMail
 				"#{self.email_address} ➠ #{self.forward}"
 			else
 				self.email_address
-			end
-		end
-		
-		def self.for_email_address(email_address)
-			local_part, domain_name = email_address.split("@")
-			
-			domain = Domain.where(name: domain_name).first
-			
-			if domain
-				return domain.accounts.where(local_part: local_part).first
-			else
-				return nil
 			end
 		end
 		
