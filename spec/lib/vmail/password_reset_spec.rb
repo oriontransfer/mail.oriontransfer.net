@@ -3,7 +3,6 @@ require 'website_context'
 require 'vmail'
 
 RSpec.describe VMail::PasswordReset do
-	include_context Async::RSpec::Reactor
 	include_context "website"
 	
 	let(:new_password) {"Hello World"}

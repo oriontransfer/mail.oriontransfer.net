@@ -4,7 +4,11 @@ require_relative 'website_context'
 
 # Learn about best practice specs from http://betterspecs.org
 RSpec.describe "website", timeout: 120 do
-	include_context "server"
+	include_context "website"
+	
+	before(:all) do
+		require 'benchmark/http/spider'
+	end
 	
 	let(:spider) {Benchmark::HTTP::Spider.new(depth: 128)}
 	let(:statistics) {Benchmark::HTTP::Statistics.new}

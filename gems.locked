@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/socketry/db-model
-  revision: 91dd07f242cc78d9667c5f84d986992b08daeacb
+  revision: ceec6459217f18220f05c1b75deaa050185f3e14
   specs:
     db-model (0.1.0)
       db (~> 0.10.0)
@@ -36,7 +36,7 @@ GEM
       protocol-http2 (~> 0.14.0)
     async-http-cache (0.4.2)
       async-http (~> 0.56)
-    async-io (1.31.0)
+    async-io (1.32.0)
       async (~> 1.14)
     async-pool (0.3.6)
       async (~> 1.25)
@@ -57,6 +57,7 @@ GEM
       trenni-sanitize
     build-environment (1.13.0)
     build-files (1.7.1)
+    childprocess (3.0.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.8)
     console (1.12.0)
@@ -129,6 +130,8 @@ GEM
     msgpack (1.4.2)
     nenv (0.3.0)
     nio4r (2.5.7)
+    nokogiri (1.11.6-x86_64-linux)
+      racc (~> 1.4)
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -147,6 +150,7 @@ GEM
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    racc (1.5.2)
     rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -156,6 +160,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    rexml (3.2.5)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
       rspec-expectations (~> 3.10.0)
@@ -174,9 +179,13 @@ GEM
       rspec-support (~> 3.10.0)
     rspec-support (3.10.2)
     ruby2_keywords (0.0.4)
+    rubyzip (2.3.0)
     samovar (2.1.4)
       console (~> 1.0)
       mapping (~> 1.0)
+    selenium-webdriver (3.142.7)
+      childprocess (>= 0.5, < 4.0)
+      rubyzip (>= 1.2.2)
     shellany (0.0.1)
     thor (1.1.0)
     thread-local (1.1.0)
@@ -201,9 +210,13 @@ GEM
       variant (~> 0.1)
     variant (0.1.1)
       thread-local
+    webdrivers (4.6.0)
+      nokogiri (~> 1.6)
+      rubyzip (>= 1.3.0)
+      selenium-webdriver (>= 3.0, < 4.0)
 
 PLATFORMS
-  ruby
+  x86_64-linux
 
 DEPENDENCIES
   async-rspec
@@ -222,10 +235,12 @@ DEPENDENCIES
   mapping (~> 1.0)
   migrate
   rack-test
+  rexml
   rspec
   trenni-formatters (~> 2.0)
   utopia (~> 2.17)
   variant
+  webdrivers
 
 BUNDLED WITH
-   2.2.16
+   2.2.15

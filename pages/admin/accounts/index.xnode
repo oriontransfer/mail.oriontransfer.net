@@ -11,20 +11,22 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?r VMail::Domain.all.each do |domain| ?>
-			<tr>
-				<th></th>
-				<th class="number">#{domain.disk_usage_string}</th>
-				<th>#{domain.name}</th>
-				<th></th>
-			</tr>
-				<?r domain.accounts.each do |account| ?>
-				<tr data-id="#{account.id}">
-					<th class="actions"><a class="button edit" href="edit?id=#{account.id}"><i class="fa fa-edit"></i></a></th>
-					<td class="number">#{account.disk_usage_string}</td>
-					<td>#{account.description}</td>
-					<th class="actions"><input type="checkbox" class="selected" /></th>
+			<?r VMail.schema do |schema| ?>
+				<?r schema.domains.to_a.each do |domain| ?>
+				<tr>
+					<th></th>
+					<th class="number">#{domain.disk_usage_string}</th>
+					<th>#{domain.name}</th>
+					<th></th>
 				</tr>
+					<?r domain.accounts.each do |account| ?>
+					<tr data-id="#{account.id}">
+						<th class="actions"><a class="button edit" href="edit?id=#{account.id}"><i class="fa fa-edit"></i></a></th>
+						<td class="number">#{account.disk_usage_string}</td>
+						<td>#{account.description}</td>
+						<th class="actions"><input type="checkbox" class="selected" /></th>
+					</tr>
+					<?r end ?>
 				<?r end ?>
 			<?r end ?>
 		</tbody>

@@ -9,18 +9,20 @@ on 'login' do |request|
 		
 		fail!(:unprocessible, "email and password are required") unless email and password
 		
-		account = VMail::Account.for_email_address(email)
-		
-		fail!(:unauthorized, "account does not have admin access") unless account&.is_admin
-		
-		if account&.plaintext_authenticate(password)
-			request.session[:account_id] = account.id
+		VMail.schema do |schema|
+			account = schema.account_for_email_address(email)
 			
-			goto! "admin/accounts/index"
-		else
-			sleep 1
+			fail!(:unauthorized, "account does not have admin access") unless account&.is_admin
 			
-			fail! :unauthorized, "email or password is incorrect"
+			if account&.plaintext_authenticate(password)
+				request.session[:account_id] = account.id
+				
+				goto! "admin/accounts/index"
+			else
+				sleep 1
+				
+				fail! :unauthorized, "email (#{email}) or password (#{password}) is incorrect"
+			end
 		end
 	end
 end
