@@ -109,8 +109,8 @@ module VMail
 			object.httpdate
 		end
 		
-		def select(options = {}, &block)
-			element(Trenni::Formatters::HTML::OptionSelect, options, &block)
+		def select(**options, &block)
+			element(Trenni::Formatters::HTML::OptionSelect, **options, &block)
 		end
 	end
 end
