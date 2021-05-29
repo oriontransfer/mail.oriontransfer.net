@@ -1,5 +1,5 @@
 <?r
-	f = VMail::ViewFormatter.new
+	form = VMail::ViewFormatter.new
 	
 ?><content:page>
 	<content:heading>Password Resets</content:heading>
@@ -15,19 +15,21 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?r VMail::PasswordReset.all.includes(:account => :domain).each do |password_reset| ?>
-			<tr>
-				<th></th>
-				<th><?r if account = password_reset.account ?>
-						#{f.text account.email_address}
-					<?r else ?>
-						(deleted)
-					<?r end ?>
-				</th>
-				<td><a href="#{password_reset.url(nil)}">#{password_reset.url}</a></td>
-				<th>#{f.text password_reset.used_at}</th>
-				<th></th>
-			</tr>
+			<?r VMail.schema do |schema| ?>
+				<?r schema.password_resets.to_a.each do |password_reset| ?>
+				<tr>
+					<th></th>
+					<th><?r if account = password_reset.account ?>
+							#{form.text account.email_address}
+						<?r else ?>
+							(deleted)
+						<?r end ?>
+					</th>
+					<td><a href="#{password_reset.url(nil)}">#{password_reset.url}</a></td>
+					<th>#{form.text password_reset.used_at}</th>
+					<th></th>
+				</tr>
+				<?r end ?>
 			<?r end ?>
 		</tbody>
 	</table>

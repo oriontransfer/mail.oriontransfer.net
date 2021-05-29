@@ -9,32 +9,31 @@ AccountAttributes = VMail::Attributes.new(
 )
 
 on 'new' do |request, path|
-	@account = VMail::Account.new
-	
-	@account.password_plaintext = VMail::Account.generate_password
-	
-	if request.post?
-		attributes = AccountAttributes.select(request.params)
+	VMail.schema do |schema|
+		@account = schema.account.new
+		@account.password_plaintext = VMail::Account.generate_password
 		
-		@account.update_attributes(attributes)
-		
-		@account.save
-		
-		redirect! "index"
+		if request.post?
+			AccountAttributes.assign(request.params, @account)
+			
+			@account.save
+			
+			redirect! "index"
+		end
 	end
 end
 
 on 'edit' do |request, path|
-	@account = VMail::Account.find(request[:id].to_i)
-	
-	if request.post?
-		attributes = AccountAttributes.select(request.params)
+	VMail.schema do |schema|
+		@account = schema.find(request[:id].to_i)
 		
-		@account.update_attributes(attributes)
-		
-		@account.save
-		
-		redirect! request[:_return] || "index"
+		if request.post?
+			AccountAttributes.assign(request.params, @account)
+			
+			@account.save
+			
+			redirect! request[:_return] || "index"
+		end
 	end
 end
 
@@ -44,7 +43,9 @@ on 'delete' do |request|
 	if values = request.params['rows'].values
 		ids = values.collect{|row| row['id']}
 		
-		VMail::Account.destroy(ids)
+		VMail.schema do |schema|
+			schema.accounts.where(id: ids).delete
+		end
 	end
 	
 	succeed!

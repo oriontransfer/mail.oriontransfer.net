@@ -6,30 +6,30 @@ PasswordResetAttributes = VMail::Attributes.new(
 )
 
 on 'new' do |request, path|
-	@password_reset = VMail::PasswordReset.new
-	
-	if request.post?
-		attributes = PasswordResetAttributes.select(request.params)
+	VMail.schema do |schema|
+		@password_reset = schema.password_resets.new
 		
-		@password_reset.update_attributes(attributes)
-		
-		@password_reset.save
-		
-		redirect! "index"
+		if request.post?
+			PasswordResetAttributes.assign(request.params, @password_reset)
+			
+			@password_reset.save
+			
+			redirect! "index"
+		end
 	end
 end
 
 on 'edit' do |request, path|
-	@password_reset = VMail::PasswordReset.find(request[:id].to_i)
-	
-	if request.post?
-		attributes = PasswordResetAttributes.select(request.params)
+	VMail.schema do |schema|
+		@password_reset = schema.password_resets.find(request[:id].to_i)
 		
-		@password_reset.update_attributes(attributes)
-		
-		@password_reset.save
-		
-		redirect! request[:_return] || "index"
+		if request.post?
+			PasswordResetAttributes.assign(request.params, @password_reset)
+			
+			@password_reset.save
+			
+			redirect! request[:_return] || "index"
+		end
 	end
 end
 
