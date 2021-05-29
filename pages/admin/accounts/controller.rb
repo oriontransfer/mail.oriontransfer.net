@@ -10,7 +10,7 @@ AccountAttributes = VMail::Attributes.new(
 
 on 'new' do |request, path|
 	VMail.schema do |schema|
-		@account = schema.account.new
+		@account = schema.accounts.new
 		@account.password_plaintext = VMail::Account.generate_password
 		
 		if request.post?
@@ -25,7 +25,7 @@ end
 
 on 'edit' do |request, path|
 	VMail.schema do |schema|
-		@account = schema.find(request[:id].to_i)
+		@account = schema.accounts.find(request[:id].to_i)
 		
 		if request.post?
 			AccountAttributes.assign(request.params, @account)
