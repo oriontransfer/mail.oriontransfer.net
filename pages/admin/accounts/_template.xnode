@@ -5,8 +5,10 @@
 	<fieldset><legend>Domain</legend>
 		<dl>
 		<?r form.select :field => :domain_id do |select| ?>
-			<?r VMail::Domain.find_each do |domain| ?>
-				#{select.item :title => domain.name, :value => domain.id}
+			<?r VMail.schema do |schema| ?>
+				<?r schema.domains.each do |domain| ?>
+					#{select.item :title => domain.name, :value => domain.id}
+				<?r end ?>
 			<?r end ?>
 		<?r end ?>
 		</dl>
