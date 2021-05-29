@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/socketry/db-model
-  revision: ceec6459217f18220f05c1b75deaa050185f3e14
+  revision: 94acf4529eb1801a7bd310bb6a3f4e2a18be622d
   specs:
     db-model (0.1.0)
       db (~> 0.10.0)
