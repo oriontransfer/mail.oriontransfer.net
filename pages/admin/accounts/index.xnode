@@ -19,7 +19,7 @@
 					<th>#{domain.name}</th>
 					<th></th>
 				</tr>
-					<?r domain.accounts.each do |account| ?>
+					<?r domain.accounts.to_a.each do |account| ?>
 					<tr data-id="#{account.id}">
 						<th class="actions"><a class="button edit" href="edit?id=#{account.id}"><i class="fa fa-edit"></i></a></th>
 						<td class="number">#{account.disk_usage_string}</td>
