@@ -70,7 +70,7 @@ GEM
     db (0.10.3)
       async-io
       async-pool
-    db-mariadb (0.9.1)
+    db-mariadb (0.9.2)
       async-io
       ffi-module (~> 0.3.0)
     diff-lcs (1.4.4)

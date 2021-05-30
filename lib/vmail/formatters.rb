@@ -35,7 +35,13 @@ module VMail
 			@keys.each do |key|
 				value = parameters[key.to_s]
 				
-				if value
+				if key.start_with?('is_')
+					if value == 'true'
+						value = true
+					else
+						value = false
+					end
+				elsif value
 					if value.empty?
 						value = nil
 					end
