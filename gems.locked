@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/socketry/db-model
-  revision: edfba141d7bd28a4bb847ff9adbf75814820412f
+  revision: 730ba0e308a4354dd088e43b3eb6c24bbfc23dff
   specs:
     db-model (0.1.0)
       db (~> 0.10.0)
@@ -70,7 +70,7 @@ GEM
     db (0.10.3)
       async-io
       async-pool
-    db-mariadb (0.9.2)
+    db-mariadb (0.9.3)
       async-io
       ffi-module (~> 0.3.0)
     diff-lcs (1.4.4)
