@@ -9,6 +9,8 @@ RSpec.describe VMail::PasswordReset do
 	
 	before do
 		VMail.schema do |schema|
+			schema.clear!
+			
 			@domain = schema.domains.create(name: 'localhost')
 			@account = @domain.accounts.create(local_part: 'test', name: 'Test')
 			@password_reset = @account.password_resets.create
