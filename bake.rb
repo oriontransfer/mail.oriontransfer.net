@@ -19,3 +19,11 @@ end
 def environment
 	require_relative 'config/environment'
 end
+
+def shell
+	environment
+	
+	VMail.schema do |schema|
+		binding.irb
+	end
+end

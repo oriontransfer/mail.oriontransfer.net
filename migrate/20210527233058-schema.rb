@@ -11,8 +11,8 @@ migrate(VMail::DATABASE, using: DB::Migrate) do
 		column :name, "TEXT", null: false
 		column :password, "TEXT", null: true
 		column :mail_location, "TEXT", null: true
-		column :is_enabled, "TINYINT", default: 1, null: false
-		column :is_admin, "TINYINT", default: 1, null: false
+		column :is_enabled, "BOOLEAN", default: true, null: false
+		column :is_admin, "BOOLEAN", default: false, null: false
 		column :created_at, "DATETIME", null: false
 		column :updated_at, "DATETIME", null: false
 	end
@@ -22,8 +22,8 @@ migrate(VMail::DATABASE, using: DB::Migrate) do
 	create_table :domains, if_not_exists: true do
 		primary_key :id
 		
-		column :name, "TEXT", null: false
-		column :is_enabled, "TINYINT", default: 1, null: false
+		column :name, "TEXT", null: false, unique: true
+		column :is_enabled, "BOOLEAN", default: true, null: false
 		column :created_at, "DATETIME", null: false
 		column :updated_at, "DATETIME", null: false
 	end

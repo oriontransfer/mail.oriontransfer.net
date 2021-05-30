@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/socketry/db-migrate
-  revision: f617771aed9cada0032e5ab9b048fa0887fdf69f
+  revision: 850022094bec18b08b1e67082ee0f9ee38845c75
   specs:
     db-migrate (0.1.0)
       db
@@ -47,7 +47,7 @@ GEM
       rspec (~> 3.0)
       rspec-files (~> 1.0)
       rspec-memory (~> 1.0)
-    bake (0.15.0)
+    bake (0.15.1)
       samovar (~> 2.1)
     benchmark-http (0.14.0)
       async-await

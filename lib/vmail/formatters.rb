@@ -35,15 +35,15 @@ module VMail
 			@keys.each do |key|
 				value = parameters[key.to_s]
 				
-				if key.start_with?('is_')
-					if value == 'true'
-						value = true
-					else
-						value = false
-					end
-				elsif value
+				if value
 					if value.empty?
 						value = nil
+					elsif key.start_with?('is_')
+						if value == 'true'
+							value = true
+						else
+							value = false
+						end
 					end
 					
 					object.public_send(:"#{key}=", value)
