@@ -39,7 +39,9 @@ on 'delete' do |request|
 	if values = request.params['rows'].values
 		ids = values.collect{|row| row['id']}
 		
-		VMail::PasswordReset.destroy(ids)
+		VMail.schema do |schema|
+			schema.password_resets.where(id: ids).delete
+		end
 	end
 	
 	succeed!
