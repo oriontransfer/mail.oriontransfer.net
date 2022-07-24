@@ -10,10 +10,10 @@ jobs:
           - ubuntu
         
         ruby:
-          - 3.0
+          - "3.0"
     
     runs-on: ${{matrix.os}}-latest
-    
+
     services:
       mariadb:
         image: mariadb
@@ -29,9 +29,10 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 20
-    
+
     steps:
     - uses: actions/checkout@v2
+    
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{matrix.ruby}}
