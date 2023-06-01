@@ -10,7 +10,7 @@ jobs:
           - ubuntu
         
         ruby:
-          - "3.0"
+          - "3.0.5"
     
     runs-on: ${{matrix.os}}-latest
 
@@ -68,4 +68,4 @@ jobs:
         ssh-add - <<< $DEPLOY_KEY
         mkdir ~/.ssh
         ssh-keyscan -H mail.oriontransfer.net >> ~/.ssh/known_hosts
-        git push -f ssh://http@mail.oriontransfer.net/srv/http/mail.oriontransfer.net/ HEAD:master
+        git push -f ssh://http@mail.oriontransfer.net/srv/http/mail.oriontransfer.net/ HEAD:main
