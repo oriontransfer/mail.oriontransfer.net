@@ -10,7 +10,7 @@ RSpec.shared_context "website" do
 	let(:app) do
 		Rack::Builder.parse_file(
 			File.expand_path('../config.ru', __dir__)
-		).first
+		)
 	end
 	
 	before(:all) do
