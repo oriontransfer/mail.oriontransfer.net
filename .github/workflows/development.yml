@@ -10,7 +10,7 @@ jobs:
           - ubuntu
         
         ruby:
-          - "3.0.5"
+          - "3.2.5"
     
     runs-on: ${{matrix.os}}-latest
 
