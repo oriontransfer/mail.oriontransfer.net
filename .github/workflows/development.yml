@@ -20,16 +20,16 @@ jobs:
         ports:
           - 3306:3306
         env:
-          MYSQL_USER: test
-          MYSQL_PASSWORD: test
-          MYSQL_DATABASE: test
-          MYSQL_ROOT_PASSWORD: test
+          MARIADB_USER: test
+          MARIADB_PASSWORD: test
+          MARIADB_DATABASE: test
+          MARIADB_ROOT_PASSWORD: test
         options: >-
-          --health-cmd "mysqladmin ping"
+          --health-cmd "healthcheck.sh --connect --innodb_initialized"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 20
-
+    
     steps:
     - uses: actions/checkout@v2
     
