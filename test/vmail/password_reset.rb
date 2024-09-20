@@ -3,7 +3,8 @@ require 'website_context'
 require 'vmail'
 
 describe VMail::PasswordReset do
-	include_context "website"
+	include WebsiteContext
+	include Rack::Test::Methods
 	
 	let(:new_password) {"Hello World"}
 	
@@ -19,7 +20,7 @@ describe VMail::PasswordReset do
 	
 	it "should be able to reset password" do
 		expect(@password_reset.used_at).to be_nil
-		expect(@password_reset.token).to_not be_nil
+		expect(@password_reset.token).not.to be_nil
 		
 		get Trenni::URI("/password-reset/index", id: @password_reset.id, token: @password_reset.token)
 		

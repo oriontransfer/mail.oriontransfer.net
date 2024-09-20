@@ -17,6 +17,7 @@ group :preload do
 	gem "migrate"
 	gem "latinum", "~> 1.0"
 	gem "mapping", "~> 1.0"
+	gem "thread-local"
 	
 	gem "trenni-formatters", "~> 2.0"
 end

@@ -1,7 +1,7 @@
 require_relative '../config/environment'
 require 'db/migrate'
 
-migrate(VMail::DATABASE, using: DB::Migrate) do
+migrate(VMail::Database.instance, using: DB::Migrate) do
 	create_table :accounts, if_not_exists: true do
 		primary_key :id
 		column :local_part, "TEXT", null: false

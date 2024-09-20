@@ -200,6 +200,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  arm64-darwin-24
   x86_64-linux
 
 DEPENDENCIES
@@ -220,9 +221,10 @@ DEPENDENCIES
   sus
   sus-fixtures-async-http
   sus-fixtures-async-webdriver (~> 0.2)
+  thread-local
   trenni-formatters (~> 2.0)
   utopia (~> 2.17)
   variant
 
 BUNDLED WITH
-   2.5.16
+   2.4.19
