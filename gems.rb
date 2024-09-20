@@ -25,18 +25,16 @@ gem 'bake'
 gem 'bundler'
 gem 'rack-test'
 
-group :development do
-	gem 'guard-falcon', require: false
-	gem 'guard-rspec', require: false
+group :test do
+	gem "sus"
+	gem 'covered'
 	
-	gem 'webdrivers'
+	gem "sus-fixtures-async-http"
+	gem "sus-fixtures-async-webdriver", "~> 0.2"
+	
 	# Fixed in latest selenium <https://github.com/SeleniumHQ/selenium/pull/9007>:
 	gem 'rexml'
 	
-	gem 'rspec'
-	gem 'covered'
-	
-	gem 'async-rspec'
 	gem 'benchmark-http'
 end
 
