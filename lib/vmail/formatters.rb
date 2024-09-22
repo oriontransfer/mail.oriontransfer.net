@@ -1,7 +1,7 @@
 
-require 'trenni/formatters'
-require 'trenni/formatters/html/definition_list_form'
-require 'trenni/formatters/html/option_select'
+require 'xrb/formatters'
+require 'xrb/formatters/html/definition_list_form'
+require 'xrb/formatters/html/option_select'
 
 module VMail
 	class Attributes
@@ -52,7 +52,7 @@ module VMail
 		end
 	end
 	
-	class ViewFormatter < Trenni::Formatters::Formatter
+	class ViewFormatter < XRB::Formatters::Formatter
 		map(Time) do |object, options|
 			# Ensure we display the time in localtime, and show the year if it is different:
 			if object.localtime.year != Time.now.year
@@ -71,7 +71,7 @@ module VMail
 		end
 		
 		def mailto(email_address)
-			Trenni::Builder.fragment do |builder|
+			XRB::Builder.fragment do |builder|
 				builder.inline(:a, :href => "mailto:#{email_address}") { builder.text email_address }
 			end
 		end
@@ -109,14 +109,14 @@ module VMail
 	end
 	
 	class FormFormatter < ViewFormatter
-		include Trenni::Formatters::HTML::DefinitionListForm
+		include XRB::Formatters::HTML::DefinitionListForm
 		
 		map(Time) do |object, options|
 			object.httpdate
 		end
 		
 		def select(**options, &block)
-			element(Trenni::Formatters::HTML::OptionSelect, **options, &block)
+			element(XRB::Formatters::HTML::OptionSelect, **options, &block)
 		end
 	end
 end

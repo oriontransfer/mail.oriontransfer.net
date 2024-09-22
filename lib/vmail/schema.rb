@@ -43,13 +43,13 @@ module VMail
 	
 	def self.transaction(&block)
 		Sync do
-			DATABASE.transaction(&block)
+			Database.instance.transaction(&block)
 		end
 	end
 	
 	def self.schema
 		Sync do
-			DATABASE.transaction do |session|
+			Database.instance.transaction do |session|
 				yield Schema.new(session)
 			end
 		end

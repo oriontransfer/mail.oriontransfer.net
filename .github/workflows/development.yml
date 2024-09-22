@@ -33,25 +33,29 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{matrix.ruby}}
-        bundler-cache: true
-    
-    - name: Installing dependencies (ubuntu)
+    - name: Installing dependencies
       if: matrix.os == 'ubuntu'
       run: |
         sudo systemctl stop mysql
         sudo apt-get install libmariadb-dev
     
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{matrix.ruby}}
+        bundler-cache: true
+    
     - name: Setup database
       run: |
         VARIANT=testing bundle exec bake migrate
     
-    - name: Run tests
-      timeout-minutes: 5
-      run: ${{matrix.env}} bundle exec rspec
-  
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{matrix.ruby}}
+        bundler-cache: true
+      
+    - name: Run tests...
+      run: bundle exec sus
+    
   deploy:
     needs: test
     runs-on: ubuntu-latest
@@ -59,7 +63,6 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    
     - name: Push to remote system
       env:
         DEPLOY_KEY: ${{secrets.deploy_key}}

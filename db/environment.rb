@@ -1,6 +1,7 @@
 
 require 'db/client'
 require 'db/mariadb'
+require 'thread/local'
 
 module VMail
 	case Variant.default
@@ -18,5 +19,11 @@ module VMail
 		CREDENTIALS = {username: 'test', password: 'test', database: 'test', host: '127.0.0.1'}
 	end
 	
-	DATABASE = DB::Client.new(DB::MariaDB::Adapter.new(**CREDENTIALS))
+	module Database
+		extend Thread::Local
+		
+		def self.local
+			DB::Client.new(DB::MariaDB::Adapter.new(**CREDENTIALS))
+		end
+	end
 end
