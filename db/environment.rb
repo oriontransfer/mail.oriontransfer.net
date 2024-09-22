@@ -16,7 +16,7 @@ module VMail
 	when :testing
 		MAIL_ROOT = "db/mail"
 		DOMAIN = 'https://localhost'
-		CREDENTIALS = {username: 'test', password: 'test', database: 'test'}
+		CREDENTIALS = {username: 'test', password: 'test', database: 'test', host: '127.0.0.1'}
 	end
 	
 	module Database
