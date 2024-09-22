@@ -6,6 +6,7 @@ require 'db/model/record'
 require 'securerandom'
 require 'digest/sha1'
 require 'base64'
+require 'open3'
 
 module VMail
 	class Account
@@ -53,7 +54,15 @@ module VMail
 		end
 		
 		def disk_usage_string
-			`sudo -n du -hs #{home_path.dump}`.split(/\s+/).first
+			command = ["sudo", "-n", "du", "-hs", home_path]
+			
+			stdout, stderr, status = Open3.capture3(*command)
+			
+			if status.success?
+				stdout.split(/\s+/).first
+			else
+				"Unknown: #{stderr}"
+			end
 		end
 		
 		def email_address

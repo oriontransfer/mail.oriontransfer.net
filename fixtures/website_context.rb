@@ -20,8 +20,8 @@ module WebsiteContext
 	end
 	
 	def middleware
-		Falcon::Middleware::Verbose.new(
+		# Falcon::Middleware::Verbose.new(
 			Protocol::Rack::Adapter.new(app)
-		)
+		# )
 	end
 end

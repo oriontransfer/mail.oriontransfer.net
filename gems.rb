@@ -11,20 +11,21 @@ group :preload do
 	
 	gem "db"
 	gem "db-mariadb"
-	gem "db-model", git: "https://github.com/socketry/db-model"
-	gem "db-migrate", git: "https://github.com/socketry/db-migrate"
+	gem "db-model"
+	gem "db-migrate-x"
 	
 	gem "migrate"
 	gem "latinum", "~> 1.0"
 	gem "mapping", "~> 1.0"
 	gem "thread-local"
 	
-	gem "trenni-formatters", "~> 2.0"
+	gem "xrb-formatters"
 end
 
 gem 'bake'
 gem 'bundler'
 gem 'rack-test'
+gem "async-http", "~> 0.78.0"
 
 group :test do
 	gem "sus"

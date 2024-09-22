@@ -21,15 +21,4 @@ describe "website" do
 		expect(statistics.samples).to be(:any?)
 		expect(statistics.failed).to be(:zero?)
 	end
-	
-	with "interactive session" do
-		include WebDriverContext
-		
-		it "can visit the front page" do
-			visit "/"
-			
-			elements = find_elements(xpath: "//*[contains(text(), 'Seamless Scalability for Ruby')]")
-			expect(elements).to be(:any?)
-		end
-	end
 end

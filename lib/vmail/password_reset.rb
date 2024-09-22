@@ -1,7 +1,7 @@
 
 require_relative 'domain'
 
-require 'trenni/uri'
+require 'xrb/uri'
 
 module VMail
 	module TimestampWithoutTimeZone
@@ -44,7 +44,7 @@ module VMail
 		end
 		
 		def url(domain = DOMAIN)
-			Trenni::URI("#{domain}/password-reset/index", id: self.id, token: self.token)
+			XRB::URI("#{domain}/password-reset/index", id: self.id, token: self.token)
 		end
 		
 		EXPIRES_AFTER = (60 * 60 * 24 * 2)

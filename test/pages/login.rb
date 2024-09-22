@@ -25,7 +25,7 @@ describe "pages/login" do
 		session.fill_in "password", password
 		
 		session.click_button "Login"
-	rescue => error
-		pp error: error.inspect
+		
+		expect(session).to have_element(xpath: "//table[@class='listing']//td[text()='test@localhost']")
 	end
 end
