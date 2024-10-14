@@ -25,17 +25,14 @@ end
 gem 'bake'
 gem 'bundler'
 gem 'rack-test'
-gem "async-http", "~> 0.78.0"
+gem "async-http"
 
 group :test do
 	gem "sus"
 	gem 'covered'
 	
 	gem "sus-fixtures-async-http"
-	gem "sus-fixtures-async-webdriver", "~> 0.2"
-	
-	# Fixed in latest selenium <https://github.com/SeleniumHQ/selenium/pull/9007>:
-	gem 'rexml'
+	gem "sus-fixtures-async-webdriver"
 	
 	gem 'benchmark-http'
 end
