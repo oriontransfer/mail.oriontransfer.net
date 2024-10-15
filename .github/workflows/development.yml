@@ -4,15 +4,7 @@ on: [push]
 
 jobs:
   test:
-    strategy:
-      matrix:
-        os:
-          - ubuntu
-        
-        ruby:
-          - "3.3.5"
-    
-    runs-on: ${{matrix.os}}-latest
+    runs-on: ubuntu-latest
 
     services:
       mariadb:
@@ -34,25 +26,18 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: Installing dependencies
-      if: matrix.os == 'ubuntu'
       run: |
         sudo systemctl stop mysql
         sudo apt-get install libmariadb-dev
     
     - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: ${{matrix.ruby}}
         bundler-cache: true
     
     - name: Setup database
       run: |
         VARIANT=testing bundle exec bake migrate
     
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{matrix.ruby}}
-        bundler-cache: true
-      
     - name: Run tests...
       run: bundle exec sus
     
