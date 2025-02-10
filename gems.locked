@@ -63,7 +63,7 @@ GEM
     covered (0.26.0)
       console (~> 1.0)
       msgpack (~> 1.0)
-    date (3.3.4)
+    date (3.4.1)
     db (0.12.0)
       async-pool
     db-mariadb (0.11.2)
@@ -128,7 +128,7 @@ GEM
     mime-types-data (3.2024.1001)
     mini_mime (1.1.5)
     msgpack (1.7.3)
-    net-imap (0.4.17)
+    net-imap (0.4.19)
       date
       net-protocol
     net-pop (0.1.2)
@@ -171,7 +171,7 @@ GEM
     sus-fixtures-async-webdriver (0.2.0)
       async-webdriver (~> 0.3)
     thread-local (1.1.0)
-    timeout (0.4.1)
+    timeout (0.4.3)
     traces (0.13.1)
     utopia (2.25.0)
       bake (~> 0.20)
