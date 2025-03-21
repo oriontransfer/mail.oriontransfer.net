@@ -25,14 +25,14 @@ end
 
 on 'edit' do |request, path|
 	VMail.schema do |schema|
-		@account = schema.accounts.find(request[:id].to_i)
+		@account = schema.accounts.find(request.params[:id].to_i)
 		
 		if request.post?
 			AccountAttributes.assign(request.params, @account)
 			
 			@account.save
 			
-			redirect! request[:_return] || "index"
+			redirect! request.params[:_return] || "index"
 		end
 	end
 end
