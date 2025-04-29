@@ -132,7 +132,7 @@ GEM
     mime-types-data (3.2025.0304)
     mini_mime (1.1.5)
     msgpack (1.8.0)
-    net-imap (0.5.6)
+    net-imap (0.5.7)
       date
       net-protocol
     net-pop (0.1.2)
