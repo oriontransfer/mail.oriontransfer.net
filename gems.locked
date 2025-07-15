@@ -211,7 +211,7 @@ GEM
     variant (0.1.1)
       thread-local
     xrb (0.11.2)
-    xrb-formatters (0.1.0)
+    xrb-formatters (0.1.1)
       mapping (~> 1.1)
       xrb (~> 0.6)
     xrb-sanitize (0.7.1)

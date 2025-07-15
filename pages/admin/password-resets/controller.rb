@@ -21,14 +21,14 @@ end
 
 on 'edit' do |request, path|
 	VMail.schema do |schema|
-		@password_reset = schema.password_resets.find(request.params[:id].to_i)
+		@password_reset = schema.password_resets.find(request.params["id"].to_i)
 		
 		if request.post?
 			PasswordResetAttributes.assign(request.params, @password_reset)
 			
 			@password_reset.save
 			
-			redirect! request.params[:_return] || "index"
+			redirect! request.params["_return"] || "index"
 		end
 	end
 end
