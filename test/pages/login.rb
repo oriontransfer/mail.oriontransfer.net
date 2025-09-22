@@ -18,7 +18,20 @@ describe "pages/login" do
 		end
 	end
 	
-	it "can log in" do
+	before do
+		session.implicit_wait_timeout = 5000
+	end
+	
+	it "debug account totp state" do
+		VMail.schema do |schema|
+			account = schema.accounts.find(@account.id)
+			puts "Account TOTP secret: #{account.totp_secret.inspect}"
+			puts "Account TOTP enabled: #{account.totp_enabled.inspect}"  
+			puts "Account TOTP setup required: #{account.totp_setup_required?.inspect}"
+		end
+	end
+	
+	it "redirects to TOTP setup when TOTP is not configured" do
 		navigate_to "/login"
 		
 		session.fill_in "email", @account.email_address
@@ -26,6 +39,86 @@ describe "pages/login" do
 		
 		session.click_button "Login"
 		
-		expect(session).to have_element(xpath: "//table[@class='listing']//td[text()='test@localhost']")
+		# Should redirect to TOTP setup page
+		expect(session.current_url).to be(:include?, "/totp-setup")
+	end
+	
+	it "can complete TOTP setup and login" do
+		navigate_to "/login"
+		
+		session.fill_in "email", @account.email_address
+		session.fill_in "password", password
+		
+		session.click_button "Login"
+		
+		# Should be on TOTP setup page
+		expect(session.current_url).to be(:include?, "/totp-setup")
+		
+		# Wait for the page to load and secret to be generated
+		expect(session).to have_element(xpath: "//input[@name='totp_token']")
+		
+		# Reload account to get the generated secret
+		VMail.schema do |schema|
+			@account = schema.accounts.find(@account.id)
+			
+			# The controller should have already generated the secret
+			expect(@account.totp_secret).not.to be_nil
+			
+			# Generate a valid TOTP token
+			totp_token = @account.totp.now
+			
+			session.fill_in "totp_token", totp_token
+			session.click_button "Complete Setup"
+			
+			# Should redirect to admin dashboard
+			expect(session).to have_element(xpath: "//table[@class='listing']//td[text()='test@localhost']")
+		end
+	end
+	
+	it "can login with TOTP when already configured" do
+		# Setup TOTP for the account first
+		VMail.schema do |schema|
+			@account.generate_totp_secret!
+			@account.totp_enabled = true
+			@account.save
+		end
+		
+		navigate_to "/login"
+		
+		# Fill in all fields at once
+		session.fill_in "email", @account.email_address
+		session.fill_in "password", password
+		
+		VMail.schema do |schema|
+			@account = schema.accounts.find(@account.id)
+			totp_token = @account.totp.now
+			
+			session.fill_in "totp_token", totp_token
+			session.click_button "Login"
+			
+			# Should redirect to admin dashboard
+			expect(session).to have_element(xpath: "//table[@class='listing']//td[text()='test@localhost']")
+		end
+	end
+	
+	it "shows error for missing TOTP when required" do
+		# Setup TOTP for the account first
+		VMail.schema do |schema|
+			@account.generate_totp_secret!
+			@account.totp_enabled = true
+			@account.save
+		end
+		
+		navigate_to "/login"
+		
+		session.fill_in "email", @account.email_address
+		session.fill_in "password", password
+		# Don't fill in TOTP token
+		
+		session.click_button "Login"
+		
+		# Should stay on login page and show TOTP field as required
+		expect(session.current_url).to be(:include?, "/login")
+		expect(session).to have_element(xpath: "//input[@name='totp_token'][@required]")
 	end
 end

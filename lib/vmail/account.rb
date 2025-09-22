@@ -7,6 +7,8 @@ require 'securerandom'
 require 'digest/sha1'
 require 'base64'
 require 'open3'
+require 'rotp'
+require 'qrcode'
 
 module VMail
 	class Account
@@ -25,6 +27,9 @@ module VMail
 		
 		property :is_enabled
 		property :is_admin
+		
+		property :totp_secret
+		property :totp_enabled
 		
 		property :created_at
 		property :updated_at
@@ -81,6 +86,32 @@ module VMail
 		
 		def plaintext_authenticate(password)
 			check_password(password, self.password)
+		end
+		
+		# TOTP Methods
+		def generate_totp_secret!
+			self.totp_secret = ROTP::Base32.random
+		end
+		
+		def totp
+			ROTP::TOTP.new(self.totp_secret, issuer: "Mail Server")
+		end
+		
+		def totp_provisioning_uri
+			totp.provisioning_uri(self.email_address)
+		end
+		
+		def totp_qr_code_svg
+			XRB::Markup.raw(QRCode.svg(totp_provisioning_uri))
+		end
+		
+		def verify_totp(token)
+			return false unless self.totp_secret && self.totp_enabled
+			totp.verify(token, drift_behind: 15, drift_ahead: 15)
+		end
+		
+		def totp_setup_required?
+			self.totp_secret.nil? || !self.totp_enabled
 		end
 		
 		PASSWORD_CHARACTERS = [*('a'..'z'), *('A'..'Z'),*('2'..'9'),'@', '$', '%', '&', '*', ':'].flatten - ['i', 'l', 'I', 'L', 'j', 'J']

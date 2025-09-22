@@ -20,12 +20,18 @@ group :preload do
 	gem "thread-local"
 	
 	gem "xrb-formatters"
+	
+	# TOTP support
+	gem "rotp"
+	gem "qrcode"
 end
 
 gem 'bake'
 gem 'bundler'
 gem 'rack-test'
 gem "async-http"
+
+gem "agent-context"
 
 group :test do
 	gem "sus"
