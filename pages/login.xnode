@@ -5,9 +5,11 @@
 		<fieldset>
 			<dl>
 				<dt><label for="email">Email:</label></dt>
-				<dd><input type="text" name="email" /></dd>
+				<dd><input type="text" name="email" value="#{controller[:email]}" /></dd>
 				<dt><label for="password">Password:</label></dt>
 				<dd><input type="password" name="password" /></dd>
+				<dt><label for="totp_token">6-Digit Authenticator Code<?r if controller[:totp_required] ?> (Required)<?r else ?> (Leave blank if not set up)<?r end ?>:</label></dt>
+				<dd><input type="text" name="totp_token" maxlength="6" pattern="[0-9]{6}" placeholder="000000" <?r if controller[:totp_required] ?>required<?r end ?> /></dd>
 				<dd class="footer"><input type="submit" value="Login" /></dd>
 			</dl>
 		</fieldset>
