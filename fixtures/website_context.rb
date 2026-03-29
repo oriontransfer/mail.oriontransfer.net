@@ -2,7 +2,6 @@
 
 require 'rack/test'
 require 'protocol/rack/adapter'
-require 'protocol/http/reference'
 
 require 'sus/fixtures/async/http/server_context'
 require 'sus/fixtures/async/webdriver/session_context'
