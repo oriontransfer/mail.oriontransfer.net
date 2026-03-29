@@ -7,6 +7,8 @@ group :preload do
 	# gem 'utopia-gallery'
 	# gem 'utopia-analytics'
 	
+	gem "async-service-supervisor"
+	
 	gem 'variant'
 	
 	gem "db"

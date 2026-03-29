@@ -7,10 +7,10 @@
 require 'falcon/environment/rack'
 require 'falcon/environment/tls'
 require 'falcon/environment/lets_encrypt_tls'
-require 'falcon/environment/supervisor'
+require 'async/service/supervisor'
 
 service 'supervisor' do
-	include Falcon::Environment::Supervisor
+	include Async::Service::Supervisor::Environment
 end
 
 hostname = File.basename(__dir__)
@@ -19,4 +19,6 @@ service hostname do
 	include Falcon::Environment::Rack
 	include Falcon::Environment::TLS
 	include Falcon::Environment::LetsEncryptTLS
+	
+	include Async::Service::Supervisor::Supervised
 end
