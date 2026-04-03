@@ -35,11 +35,12 @@ GEM
       async-http (~> 0.56)
     async-pool (0.11.2)
       async (>= 2.0)
-    async-service (0.21.0)
+    async-service (0.22.0)
       async
       async-container (~> 0.34)
       string-format (~> 0.2)
-    async-service-supervisor (0.14.0)
+    async-service-supervisor (0.15.0)
+      async (~> 2.38)
       async-bus
       async-service (~> 0.15)
       async-utilization (~> 0.3)
@@ -157,7 +158,7 @@ GEM
     mime-types (3.7.0)
       logger
       mime-types-data (~> 3.2025, >= 3.2025.0507)
-    mime-types-data (3.2026.0317)
+    mime-types-data (3.2026.0331)
     mini_mime (1.1.5)
     msgpack (1.8.0)
     net-imap (0.6.3)
@@ -184,7 +185,7 @@ GEM
     protocol-http2 (0.24.0)
       protocol-hpack (~> 1.4)
       protocol-http (~> 0.47)
-    protocol-rack (0.22.0)
+    protocol-rack (0.22.1)
       io-stream (>= 0.10)
       protocol-http (~> 0.58)
       rack (>= 1.0)
@@ -195,7 +196,7 @@ GEM
       date
       stringio
     qrcode (0.2.1)
-    rack (3.2.5)
+    rack (3.2.6)
     rack-test (2.2.0)
       rack (>= 1.3)
     rdoc (7.2.0)
